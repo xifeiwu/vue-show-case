@@ -26,14 +26,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     historyApiFallback: {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-        { from: /^\/$/, to: '/index.html' },
-        { from: /^\/index/, to: '/index.html' },
+        { from: /^\/$/, to: '/profile.html' },
         { from: /^\/login/, to: '/login.html' },
-        { from: /^\/user/, to: '/user.html' },
-        { from: /^\/terminal/, to: '/terminal.html' },
-        { from: /^\/docs/, to: '/docs.html' },
         { from: /^\/(profile|app|work-order|config-server|instance|service|domain|log|oauth|cdn)/, to: '/profile.html' },
-        { from: /^\/manage/, to: '/manage.html' },
       ],
     },
     hot: true,

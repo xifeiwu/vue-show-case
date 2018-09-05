@@ -33,7 +33,7 @@ const chunksAndTemplates = (() => {
   let htmlConfigs = [
     {
       "filename": "profile.html",
-      "title": "凡普云-控制台",
+      "title": "vue-components",
       "cdn": {
         "js": [],
         "css": ['/assets/libs/element-ui/element-ui.css']
