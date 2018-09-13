@@ -36,7 +36,7 @@ const chunksAndTemplates = (() => {
       "title": "vue-components",
       "cdn": {
         "js": [],
-        "css": ['/assets/libs/element-ui/element-ui.css']
+        "css": []
       },
       "chunks": ["profile"],
     }

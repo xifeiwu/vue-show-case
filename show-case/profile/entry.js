@@ -13,7 +13,13 @@ Vue.prototype.$ajax = axios;
 import 'assets/css/fix-style.scss';
 import '$assets/css/common.scss';
 
+// paas-icons for icon and svg
+import '$assets/css/fonts/paas-icon.css';
+import '$assets/css/fonts/paas-icon.js';
+
 import indexPage from './index.vue';
+
+import 'element-ui/packages/theme-chalk/src/index.scss';
 
 import(/* webpackChunkName: "components-docs" */ '$assets/libs/components/profile.js').then(components => {
   components.default.install(Vue);
