@@ -22,6 +22,8 @@ import router from './pages/router';
 
 import 'element-ui/packages/theme-chalk/src/index.scss';
 
+import net from './net';
+Vue.prototype.$net = net;
 import(/* webpackChunkName: "components-docs" */ '$assets/libs/components/profile.js').then(components => {
   components.default.install(Vue);
   window.vm = new Vue({ // eslint-disable-line

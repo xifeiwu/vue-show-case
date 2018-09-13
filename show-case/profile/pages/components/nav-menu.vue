@@ -136,15 +136,14 @@
         return {
           "level1": [{
             "id": 98,
-            "name": "Access Key管理",
+            "name": "notify",
             "path": "/2.x/keys",
-            "router": "/profile/oauth",
+            "router": "/nofity",
             "icon": "paas-icon-key"
           }, {
             "id": 104,
-            "name": "应用配置",
-            "path": "/2.x/config/server",
-            "router": "/profile/config-server",
+            "name": "echarts",
+            "router": "/echarts",
             "icon": "paas-icon-config"
           }],
           "level2": [{
