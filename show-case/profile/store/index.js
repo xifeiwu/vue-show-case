@@ -11,19 +11,19 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    config: {},
     navMenu: {},
     menuList: [],
     userInfo: {},
   },
   mutations: {
-    SET_NAV_MENU(state, navMenu) {
-      state.navMenu = {};
-      if (navMenu) {
-        for (let key in navMenu) {
-          // localStorage will not update if code run in the following way
-          // state.info[key] = userInfo[key];
-          Vue.set(state.navMenu, key, navMenu[key]);
-        }
+    SET_CONFIG(state, config) {
+      if (!state.config) {
+        state.config = {};
+      }
+      for (let key in config) {
+        // localStorage will not update if code run in the following way
+        Vue.set(state.config, key, config[key]);
       }
     },
     SET_MENUS_LIST(state, menuList) {
@@ -50,19 +50,27 @@ export default new Vuex.Store({
         commit('SET_MENUS_LIST', menuList)
       }
     },
-    saveNavMenu ({ commit, state }, navMenu) {
-      commit('SET_NAV_MENU', navMenu)
+    setConfig({commit}, config) {
+      commit('SET_CONFIG', config)
     },
     updateUserInfo ({ commit, state }, userInfo) {
       commit('SET_USER_INFO', userInfo)
     },
   },
+  getters: {
+    'collapseMenu': (state, getters) => {
+      if (!state.config) {
+        state.config = {}
+      }
+      return state.config.collapseMenu;
+    }
+  },
   modules:{
     global
   },
   plugins: [createPersistedState({
-    key: 'login',
+    key: 'vue-components',
     // 暂时只持久化 etc 模块，防止冲突
-    paths: ['navMenu', 'menuList', 'userInfo']
+    paths: ['config', 'menuList', 'userInfo']
   })]
 })
