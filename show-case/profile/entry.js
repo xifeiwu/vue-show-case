@@ -17,7 +17,8 @@ import '$assets/css/common.scss';
 import '$assets/css/fonts/paas-icon.css';
 import '$assets/css/fonts/paas-icon.js';
 
-import indexPage from './index.vue';
+import indexPage from './pages/index.vue';
+import router from './pages/router';
 
 import 'element-ui/packages/theme-chalk/src/index.scss';
 
@@ -26,6 +27,7 @@ import(/* webpackChunkName: "components-docs" */ '$assets/libs/components/profil
   window.vm = new Vue({ // eslint-disable-line
     render: h => h(indexPage),
     store: store,
+    router: router,
   }).$mount('#app');
 });
 
