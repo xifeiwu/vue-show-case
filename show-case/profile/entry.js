@@ -24,8 +24,14 @@ import 'element-ui/packages/theme-chalk/src/index.scss';
 
 import net from './net';
 Vue.prototype.$net = net;
-import(/* webpackChunkName: "components-docs" */ 'assets/libs/components/profile.js').then(components => {
-  components.default.install(Vue);
+
+Promise.all([
+  import(/* webpackChunkName: "vue-element-ui" */ 'assets/libs/components/profile.js'),
+  import(/* webpackChunkName: "vue-components" */ 'assets/libs/components/components.js')
+])
+.then(components => {
+  components[0].default.install(Vue);
+  components[1].default.install(Vue);
   window.vm = new Vue({ // eslint-disable-line
     render: h => h(indexPage),
     store: store,

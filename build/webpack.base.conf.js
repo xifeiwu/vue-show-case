@@ -69,10 +69,10 @@ var baseConfig = {
     extensions: ['.js', '.vue', '.json', '.scss', '.sass'],
     alias: {
       'element-ui': utils.contextPath() + '/element-ui',
-      'components': utils.contextPath() + '/components',
+      '$components': utils.contextPath() + '/components',
       '$assets': utils.contextPath() + '/assets',
       'assets': utils.contextPath() + '/show-case/assets',
-      '$components': utils.contextPath() + '/show-case/components',
+      'components': utils.contextPath() + '/show-case/components',
     }
   },
   module: {
