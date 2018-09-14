@@ -3,6 +3,9 @@ import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
 import vChartsLine from './v-charts/line.vue';
 
+import components from './components';
+import vueTreeNavigation from './components/vue-tree-navigation.vue';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -24,6 +27,13 @@ class Helper {
       children: [{
         path: 'line',
         component: vChartsLine,
+      }]
+    }, {
+      path: '/components',
+      component: components,
+      children: [{
+        path: 'vue-tree-navigation',
+        component: vueTreeNavigation
       }]
     }];
 

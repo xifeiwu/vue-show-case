@@ -24,7 +24,7 @@
 
 <script>
   import {mapState, mapGetters} from 'vuex';
-  import navMenu from './components/nav-menu.vue';
+  import navMenu from './nav-menu.vue';
   export default {
     components: {navMenu},
     create() {

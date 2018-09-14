@@ -136,7 +136,6 @@
         const menuConfig = [{
           "id": 1,
           "name": "notify",
-          "path": "/2.x/keys",
           "router": "/notify",
           "icon": "paas-icon-key"
         }, {
@@ -156,11 +155,22 @@
             "icon": "paas-icon-config",
           }]
         }];
+        const componentsList = [{
+          "id": 1000,
+          "name": "components",
+          "router": "/components",
+          "icon": "paas-icon-key",
+          children: [{
+            "name": "vue-tree-navigation",
+            "router": "/components/vue-tree-navigation",
+            "icon": "paas-icon-key",
+          }]
+        }];
         const result = {
           level1: [],
           level2: []
         };
-        menuConfig.forEach(it => {
+        menuConfig.concat(componentsList).forEach(it => {
           if (it.hasOwnProperty('children')) {
             result.level2.push(it);
           } else {
