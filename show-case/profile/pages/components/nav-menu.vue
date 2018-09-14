@@ -133,72 +133,41 @@
         return value;
       },
       navMenu() {
-        return {
-          "level1": [{
-            "id": 1,
-            "name": "notify",
-            "path": "/2.x/keys",
-            "router": "/nofity",
-            "icon": "paas-icon-key"
-          }, {
-            "id": 2,
-            "name": "echarts",
-            "router": "/echarts",
-            "icon": "paas-icon-config"
-          }, {
+        const menuConfig = [{
+          "id": 1,
+          "name": "notify",
+          "path": "/2.x/keys",
+          "router": "/nofity",
+          "icon": "paas-icon-key"
+        }, {
+          "id": 2,
+          "name": "echarts",
+          "router": "/echarts",
+          "icon": "paas-icon-config"
+        }, {
+          "id": 3,
+          "name": "v-charts",
+          "router": "/v-charts",
+          "icon": "paas-icon-config",
+          children: [{
             "id": 3,
-            "name": "v-charts",
-            "router": "/v-charts",
-            "icon": "paas-icon-config"
-          }],
-          "level2": [{
-            "name": "应用引擎",
-            "icon": "paas-icon-app",
-            "router": "/profile/app-engine",
-            "children": [{
-              "id": 88,
-              "name": "应用管理",
-              "path": "/2.x/app",
-              "router": "/profile/app",
-              "icon": "paas-icon-app"
-            }, {
-              "id": 90,
-              "name": "服务管理",
-              "path": "/2.x/service",
-              "router": "/profile/service",
-              "icon": "paas-icon-service"
-            }, {
-              "id": 92,
-              "name": "实例列表",
-              "path": "/2.x/instances",
-              "router": "/profile/instance",
-              "icon": "paas-icon-instance"
-            }, {
-              "id": 94,
-              "name": "外网域名",
-              "path": "/2.x/internet",
-              "router": "/profile/domain",
-              "icon": "paas-icon-domain"
-            }, {
-              "id": 96,
-              "name": "日志中心",
-              "path": "/2.x/logs",
-              "router": "/profile/log",
-              "icon": "paas-icon-log"
-            }, {
-              "id": 100,
-              "name": "审批管理",
-              "path": "/2.x/orders",
-              "router": "/profile/work-order",
-              "icon": "paas-icon-work-order"
-            }]
+            "name": "line",
+            "router": "/v-charts/line",
+            "icon": "paas-icon-config",
           }]
-        }
-//        let value = {}
-//        if (this.$storeHelper.navMenu) {
-//          value = this.$storeHelper.navMenu;
-//        }
-//        return value;
+        }];
+        const result = {
+          level1: [],
+          level2: []
+        };
+        menuConfig.forEach(it => {
+          if (it.hasOwnProperty('children')) {
+            result.level2.push(it);
+          } else {
+            result.level1.push(it);
+          }
+        });
+        return result;
       }
     },
     data() {

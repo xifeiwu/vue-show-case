@@ -1,6 +1,7 @@
 import notify from './notify.vue';
 import echarts from './echarts.vue';
-import vCharts from './v-charts.vue';
+import vCharts from './v-charts/index.vue';
+import vChartsLine from './v-charts/line.vue';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -18,7 +19,12 @@ class Helper {
       component: echarts
     }, {
       path: '/v-charts',
-      component: vCharts
+      redirect: '/v-charts/line',
+      component: vCharts,
+      children: [{
+        path: 'line',
+        component: vChartsLine,
+      }]
     }];
 
     this.addRoutePath(null, this.richRouterConfig);
