@@ -29,8 +29,8 @@
 
     },
     mounted() {
-      console.log(this.$store);
-      console.log(this.$router);
+//      console.log(this.$store);
+//      console.log(this.$router);
     },
     methods: {
       handleClick(action) {
