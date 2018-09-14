@@ -1,5 +1,6 @@
 import notify from './notify.vue';
 import echarts from './echarts.vue';
+import vCharts from './v-charts.vue';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -15,6 +16,9 @@ class Helper {
     }, {
       path: '/echarts',
       component: echarts
+    }, {
+      path: '/v-charts',
+      component: vCharts
     }];
 
     this.addRoutePath(null, this.richRouterConfig);
