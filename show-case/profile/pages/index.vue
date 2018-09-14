@@ -1,6 +1,6 @@
 <template>
   <div id="profile" class="spa">
-    <nav-menu></nav-menu>
+    <nav-menu :activeSideMenuItem="activeSideMenuItem"></nav-menu>
     <div class="main">
       <router-view></router-view>
     </div>
@@ -16,6 +16,8 @@
   }
   .main {
     flex: 1;
+    height: 100%;
+    overflow: scroll;
   }
 }
 </style>
@@ -29,10 +31,22 @@
 
     },
     mounted() {
-//      console.log(this.$store);
-//      console.log(this.$router);
+      this.onRoute(this.$route);
+    },
+    watch: {
+      '$route': 'onRoute',
+    },
+    data() {
+      return {
+        activeSideMenuItem: '/notify'
+      }
     },
     methods: {
+      onRoute (route, oldValue) {
+        const relativePath = route.path;
+        this.activeSideMenuItem = relativePath;
+
+      },
       handleClick(action) {
         switch (action) {
           case 'nofity':

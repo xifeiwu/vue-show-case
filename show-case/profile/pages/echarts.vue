@@ -22,7 +22,6 @@
     mounted() {
       try {
         this.startDraw();
-        console.log(this.options2);
       } catch (err) {
         console.log(err);
       }

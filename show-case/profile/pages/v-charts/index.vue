@@ -7,6 +7,7 @@
 <style scoped>
   #v-charts {
     height: 100%;
+    overflow: scroll;
   }
 </style>
 <script>

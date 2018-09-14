@@ -137,7 +137,7 @@
           "id": 1,
           "name": "notify",
           "path": "/2.x/keys",
-          "router": "/nofity",
+          "router": "/notify",
           "icon": "paas-icon-key"
         }, {
           "id": 2,
