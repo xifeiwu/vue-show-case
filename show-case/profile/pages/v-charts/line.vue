@@ -1,17 +1,50 @@
 <template>
   <div id="v-charts_line">
-    <ve-line :data="chartData"></ve-line>
-    <ve-line :data="chartData2" :settings="chartSettings2"></ve-line>
-    <ve-line :data="chartData3" :settings="chartSettings3"></ve-line>
+    <div class="chart-container">
+      <ve-line height="300px" :data="chartData" :data-zoom="dataZoom"></ve-line>
+    </div>
+    <div class="chart-container">
+      <ve-line height="300px" :data="chartData2" :settings="chartSettings2" :events="chartEvents"></ve-line>
+    </div>
+    <div class="chart-container">
+      <ve-line height="300px" :data="chartData3" :settings="chartSettings3"></ve-line>
+    </div>
   </div>
 </template>
 
+<style lang="scss" scoped>
+  #v-charts_line {
+    /*display: flex;*/
+    .chart-container {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+      border-radius: 10px;
+      padding: 16px 16px 0px 16px;
+      .ve-line {
+        top: 12px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+        canvas {
+          top: 12px;
+        }
+      }
+    }
+  }
+</style>
 <script>
+  import 'echarts/lib/component/dataZoom'
   import VeLine from 'v-charts/lib/line.common'
   export default {
     components: { VeLine },
     data() {
       return {
+        dataZoom: [
+          {
+            type: 'slider',
+            start: 0,
+            end: 20
+          }
+        ],
         chartData: {
           columns: ['日期', '访问用户', '下单用户', '下单率'],
           rows: [
@@ -25,7 +58,13 @@
         },
         chartSettings2: {
           metrics: ['下单率'],
-          dimension: ['日期']
+          dimension: ['日期'],
+          height: "300px"
+        },
+        chartEvents: {
+          click: (evt) => {
+            console.log(evt);
+          }
         },
         chartData2: {
           columns: ['日期', '下单率', '访问用户', '下单用户'],
@@ -41,7 +80,8 @@
         chartSettings3: {
           axisSite: { right: ['下单率'] },
           yAxisType: ['KMB', 'percent'],
-          yAxisName: ['数值', '比率']
+          yAxisName: ['数值', '比率'],
+
         },
         chartData3: {
           columns: ['日期', '访问用户', '下单用户', '下单率'],
@@ -55,6 +95,8 @@
           ]
         }
       }
+    },
+    methods: {
     }
   }
 </script>
