@@ -135,15 +135,20 @@
       navMenu() {
         return {
           "level1": [{
-            "id": 98,
+            "id": 1,
             "name": "notify",
             "path": "/2.x/keys",
             "router": "/nofity",
             "icon": "paas-icon-key"
           }, {
-            "id": 104,
+            "id": 2,
             "name": "echarts",
             "router": "/echarts",
+            "icon": "paas-icon-config"
+          }, {
+            "id": 3,
+            "name": "v-charts",
+            "router": "/v-charts",
             "icon": "paas-icon-config"
           }],
           "level2": [{

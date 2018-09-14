@@ -15,6 +15,7 @@ export default new Vuex.Store({
     navMenu: {},
     menuList: [],
     userInfo: {},
+    echarts: require('./mock/echarts.json'),
   },
   mutations: {
     SET_CONFIG(state, config) {
