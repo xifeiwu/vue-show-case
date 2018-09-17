@@ -4,3 +4,6 @@
 [submodule "assets"]
 	path = assets
 	url = git@gitlab.puhuitech.cn:paas-fe/assets.git
+[submodule "components"]
+	path = components
+	url = git@gitlab.puhuitech.cn:paas-fe/components.git
