@@ -7,7 +7,7 @@
 <style lang="scss" scoped>
  #echarts {
    .cpu-monitor {
-     width: 500px;
+     width: 800px;
      height: 400px;
    }
  }

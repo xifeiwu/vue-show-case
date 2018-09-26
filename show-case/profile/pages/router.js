@@ -1,7 +1,9 @@
-import notify from './notify.vue';
 import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
 import vChartsLine from './v-charts/line.vue';
+
+import element from './element';
+import notify from './element/notify.vue';
 
 import components from './components';
 import vueTreeNavigation from './components/vue-tree-navigation.vue';
@@ -15,8 +17,12 @@ class Helper {
       path: '/',
       redirect: '/notify',
     }, {
-      path: '/notify',
-      component: notify
+      path: '/element',
+      component: element,
+      children: [{
+        path: 'notify',
+        component: notify
+      }]
     }, {
       path: '/echarts',
       component: echarts

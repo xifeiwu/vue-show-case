@@ -135,9 +135,15 @@
       navMenu() {
         const menuConfig = [{
           "id": 1,
-          "name": "notify",
-          "router": "/notify",
-          "icon": "paas-icon-key"
+          "name": "element",
+          "router": "/element",
+          "icon": "paas-icon-fa-caret-right",
+          children: [{
+            "id": 1,
+            "name": "notify",
+            "router": "/element/notify",
+            "icon": "paas-icon-key",
+          }]
         }, {
           "id": 2,
           "name": "echarts",

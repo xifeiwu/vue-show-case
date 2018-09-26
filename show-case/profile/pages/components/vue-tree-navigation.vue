@@ -44,6 +44,9 @@
                   element: 'default-open-level'
                 }
               ]
+            }, {
+              name: 'methods',
+              element: 'methods',
             }]
           },
           {
