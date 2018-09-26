@@ -139,9 +139,25 @@
           "router": "/element",
           "icon": "paas-icon-fa-caret-right",
           children: [{
-            "id": 1,
+            "id": 100,
             "name": "notify",
             "router": "/element/notify",
+            "icon": "paas-icon-fa-caret-right",
+          }, {
+            "id": 101,
+            "name": "tree",
+            "router": "/element/tree",
+            "icon": "paas-icon-fa-caret-right",
+          }]
+        }, {
+          "id": 2,
+          "name": "components",
+          "router": "/components",
+          "icon": "paas-icon-key",
+          children: [{
+            id: 201,
+            "name": "vue-tree-navigation",
+            "router": "/components/vue-tree-navigation",
             "icon": "paas-icon-key",
           }]
         }, {
@@ -161,22 +177,22 @@
             "icon": "paas-icon-config",
           }]
         }];
-        const componentsList = [{
-          "id": 1000,
-          "name": "components",
-          "router": "/components",
-          "icon": "paas-icon-key",
-          children: [{
-            "name": "vue-tree-navigation",
-            "router": "/components/vue-tree-navigation",
-            "icon": "paas-icon-key",
-          }]
-        }];
+//        const componentsList = [{
+//          "id": 1000,
+//          "name": "components",
+//          "router": "/components",
+//          "icon": "paas-icon-key",
+//          children: [{
+//            "name": "vue-tree-navigation",
+//            "router": "/components/vue-tree-navigation",
+//            "icon": "paas-icon-key",
+//          }]
+//        }];
         const result = {
           level1: [],
           level2: []
         };
-        menuConfig.concat(componentsList).forEach(it => {
+        menuConfig.forEach(it => {
           if (it.hasOwnProperty('children')) {
             result.level2.push(it);
           } else {

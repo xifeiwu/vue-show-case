@@ -4,6 +4,7 @@ import vChartsLine from './v-charts/line.vue';
 
 import element from './element';
 import notify from './element/notify.vue';
+import tree from './element/tree.vue';
 
 import components from './components';
 import vueTreeNavigation from './components/vue-tree-navigation.vue';
@@ -22,6 +23,9 @@ class Helper {
       children: [{
         path: 'notify',
         component: notify
+      }, {
+        path: 'tree',
+        component: tree
       }]
     }, {
       path: '/echarts',
