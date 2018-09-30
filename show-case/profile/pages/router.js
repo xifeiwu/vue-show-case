@@ -9,6 +9,9 @@ import tree from './element/tree.vue';
 import components from './components';
 import vueTreeNavigation from './components/vue-tree-navigation.vue';
 
+import vueIndex from './vue';
+import transition from './vue/transition/transition.vue';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -44,6 +47,13 @@ class Helper {
       children: [{
         path: 'vue-tree-navigation',
         component: vueTreeNavigation
+      }]
+    }, {
+      path: '/vue',
+      component: vueIndex,
+      children: [{
+        path: 'transition',
+        component: transition
       }]
     }];
 

@@ -161,17 +161,28 @@
             "icon": "paas-icon-key",
           }]
         }, {
-          "id": 2,
+          "id": 3,
+          "name": "vue",
+          "router": "/vue",
+          "icon": "paas-icon-key",
+          children: [{
+            id: 201,
+            "name": "transition",
+            "router": "/vue/transition",
+            "icon": "paas-icon-key",
+          }]
+        }, {
+          "id": 4,
           "name": "echarts",
           "router": "/echarts",
           "icon": "paas-icon-config"
         }, {
-          "id": 3,
+          "id": 5,
           "name": "v-charts",
           "router": "/v-charts",
           "icon": "paas-icon-config",
           children: [{
-            "id": 3,
+            "id": 500,
             "name": "line",
             "router": "/v-charts/line",
             "icon": "paas-icon-config",
