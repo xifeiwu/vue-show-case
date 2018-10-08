@@ -140,11 +140,16 @@
           "icon": "paas-icon-fa-caret-right",
           children: [{
             "id": 100,
+            "name": "menu",
+            "router": "/element/menu",
+            "icon": "paas-icon-fa-caret-right",
+          }, {
+            "id": 101,
             "name": "notify",
             "router": "/element/notify",
             "icon": "paas-icon-fa-caret-right",
           }, {
-            "id": 101,
+            "id": 102,
             "name": "tree",
             "router": "/element/tree",
             "icon": "paas-icon-fa-caret-right",
