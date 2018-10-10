@@ -1,7 +1,8 @@
 <template>
   <div id="vue-transition">
     <div class="demo">
-      <vue-transition-cartoon></vue-transition-cartoon>
+      <vue-transition-effect></vue-transition-effect>
+      <!--<vue-transition-cartoon></vue-transition-cartoon>-->
     </div>
     <div>transition</div>
     <div id="animated-number-demo">
@@ -15,9 +16,10 @@
 </style>
 <script>
   import vueTransitionCartoon from './cartoon.vue';
+  import vueTransitionEffect from './effect.vue';
 
   export default {
-    components: { vueTransitionCartoon },
+    components: { vueTransitionEffect, vueTransitionCartoon },
     created() {
 
     },
