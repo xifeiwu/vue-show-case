@@ -1,8 +1,9 @@
 <template>
   <div id="vue-transition-effect">
-    <template v-for="item in effectList">
+    <div v-for="item in effectList" style="min-height: 120px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
+      <el-button @click="handleClick('toggle-show', item)" style="width: 240px;">toggle-{{item}}</el-button>
       <transition :name="item">
-        <ul v-show="show" style="border: 1px solid gray; display: block; max-width: 300px; margin: 10px;">
+        <ul v-show="showStatus[item]" style="border: 1px solid gray; width: 300px; margin-left: 10px;">
           <li>{{item}}</li>
           <li>{{item}}</li>
           <li>{{item}}</li>
@@ -10,8 +11,7 @@
           <li>{{item}}</li>
         </ul>
       </transition>
-    </template>
-    <el-button @click="handleClick('toggle-show')">toggle</el-button>
+    </div>
   </div>
 </template>
 
@@ -74,17 +74,28 @@
 
 <script>
   export default {
+    created() {
+      this.effectList.forEach(it => {
+        this.showStatus[it] = true;
+      });
+    },
     data() {
       return {
         show: true,
+        showStatus: {
+          'el-zoom-in-top': true,
+          'el-zoom-in-bottom': true,
+          'el-zoom-in-left': true
+        },
         effectList: ['el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left']
       }
     },
     methods: {
-      handleClick(action) {
+      handleClick(action, effect) {
         switch (action) {
           case 'toggle-show':
-            this.show = !this.show;
+//            this.show = !this.show;
+            this.showStatus[effect] = !this.showStatus[effect];
             break;
         }
       }

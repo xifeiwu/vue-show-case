@@ -4,11 +4,11 @@
       <vue-transition-effect></vue-transition-effect>
       <!--<vue-transition-cartoon></vue-transition-cartoon>-->
     </div>
-    <div>transition</div>
-    <div id="animated-number-demo">
-      <input v-model.number="number" type="number" step="20">
-      <p>{{ animatedNumber }}</p>
-    </div>
+    <!--<div>transition</div>-->
+    <!--<div id="animated-number-demo">-->
+      <!--<input v-model.number="number" type="number" step="20">-->
+      <!--<p>{{ animatedNumber }}</p>-->
+    <!--</div>-->
   </div>
 </template>
 
