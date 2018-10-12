@@ -11,6 +11,13 @@
           <li>{{item}}</li>
         </ul>
       </transition>
+      <ul :class="['manual', item, showStatus[item] ? 'show':'']" style="border: 1px solid gray; width: 300px; margin-left: 10px;">
+        <li>{{item}}</li>
+        <li>{{item}}</li>
+        <li>{{item}}</li>
+        <li>{{item}}</li>
+        <li>{{item}}</li>
+      </ul>
     </div>
   </div>
 </template>
@@ -29,7 +36,7 @@
   .el-zoom-in-center-enter,
   .el-zoom-in-center-leave-active {
     opacity: 0;
-    transform: scaleX(0);
+    transform: scaleX(0.75);
   }
 
   .el-zoom-in-top-enter-active,
@@ -70,6 +77,19 @@
     opacity: 0;
     transform: scale(.45, .45);
   }
+
+  .manual {
+    &.el-zoom-in-left {
+      transition: $--md-fade-transition;
+      transform-origin: top left;
+      opacity: 0;
+      transform: scale(.45, .45);
+      &.show {
+        opacity: 1;
+        transform: scale(1, 1);
+      }
+    }
+  }
 </style>
 
 <script>
@@ -79,15 +99,30 @@
         this.showStatus[it] = true;
       });
     },
+    mounted() {
+      setTimeout(() => {
+        const elZoomInLeft = this.$el.querySelector('.manual.el-zoom-in-left');
+        elZoomInLeft && elZoomInLeft.addEventListener('transitionend', (evt) => {
+          const target = evt.target;
+//          console.log(target);
+          if (target.classList.contains('show')) {
+            target.style.display = 'block';
+          } else {
+            target.style.display = 'none';
+          }
+        });
+      });
+    },
     data() {
       return {
         show: true,
         showStatus: {
           'el-zoom-in-top': true,
           'el-zoom-in-bottom': true,
-          'el-zoom-in-left': true
+          'el-zoom-in-left': true,
+          'el-zoom-in-center': true
         },
-        effectList: ['el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left']
+        effectList: ['el-zoom-in-center', 'el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left']
       }
     },
     methods: {
@@ -96,6 +131,10 @@
           case 'toggle-show':
 //            this.show = !this.show;
             this.showStatus[effect] = !this.showStatus[effect];
+            const elZoomInLeft = this.$el.querySelector(`.manual.${effect}`);
+            if (elZoomInLeft) {
+              elZoomInLeft.style.display = 'block';
+            }
             break;
         }
       }
