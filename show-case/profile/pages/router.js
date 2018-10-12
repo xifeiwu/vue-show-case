@@ -6,6 +6,7 @@ import element from './element';
 import notify from './element/notify.vue';
 import tree from './element/tree.vue';
 import menu from './element/menu.vue';
+import input from './element/input.vue';
 
 import components from './components';
 import vueTreeNavigation from './components/vue-tree-navigation.vue';
@@ -34,6 +35,9 @@ class Helper {
       }, {
         path: 'tree',
         component: tree
+      }, {
+        path: 'input',
+        component: input
       }]
     }, {
       path: '/echarts',

@@ -153,6 +153,11 @@
             "name": "tree",
             "router": "/element/tree",
             "icon": "paas-icon-fa-caret-right",
+          }, {
+            "id": 103,
+            "name": "input",
+            "router": "/element/input",
+            "icon": "paas-icon-fa-caret-right",
           }]
         }, {
           "id": 2,
