@@ -55,6 +55,7 @@
       </el-menu-item>
     </el-menu>
 
+    <!--the use of template-->
     <template v-for="product in productList">
       <h3>{{product['title']}}</h3>
       <ul>
@@ -63,9 +64,25 @@
         </li>
       </ul>
     </template>
+
+    <div class="color-section">
+      <div v-for="(item, index) in colorList"
+           @mouseover="handleMouseOver(item)"
+           class="item"
+           :style="{ backgroundColor: item.hover ? item.hover : item.origin }"></div>
+    </div>
   </div>
 </template>
 <style lang="scss">
+  .color-section {
+    .item {
+      display: inline-block;
+      margin: 3px;
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+    }
+  }
 </style>
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
@@ -94,6 +111,18 @@
         }, {
           title: 'product2',
           list: ['d', 'e', 'f']
+        }],
+
+        colorList: [{
+          origin: '#409EFF', hover: ''
+        }, {
+          origin: '#67C23A', hover: ''
+        }, {
+          origin: '#E6A23C', hover: ''
+        }, {
+          origin: '#F56C6C', hover: ''
+        }, {
+          origin: '#909399', hover: ''
         }]
       }
     },
@@ -109,7 +138,50 @@
       },
       handleClose() {
         console.log('is closed');
-      }
+      },
+
+      getColorChannels(color) {
+        color = color.replace('#', '');
+        if (/^[1-9a-fA-F]{3}$/.test(color)) {
+          color = color.split('');
+          for (let i = 2; i >= 0; i--) {
+            color.splice(i, 0, color[i]);
+          }
+          color = color.join('');
+        }
+        if (/^[1-9a-fA-F]{6}$/.test(color)) {
+          return {
+            red: parseInt(color.slice(0, 2), 16),
+            green: parseInt(color.slice(2, 4), 16),
+            blue: parseInt(color.slice(4, 6), 16)
+          };
+        } else {
+          return {
+            red: 255,
+            green: 255,
+            blue: 255
+          };
+        }
+      },
+      mixColor(color, percent) {
+        let { red, green, blue } = this.getColorChannels(color);
+        if (percent > 0) { // shade given color
+          red *= 1 - percent;
+          green *= 1 - percent;
+          blue *= 1 - percent;
+        } else { // tint given color
+          red += (255 - red) * percent;
+          green += (255 - green) * percent;
+          blue += (255 - blue) * percent;
+        }
+        return `rgb(${ Math.round(red) }, ${ Math.round(green) }, ${ Math.round(blue) })`;
+      },
+      handleMouseOver(item) {
+        this.colorList.forEach((it) => {
+          it.hover = ''
+        });
+        item.hover = this.mixColor(item.origin, 0.2);
+      },
     }
   }
 </script>
