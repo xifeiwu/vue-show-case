@@ -11,7 +11,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    config: {},
+    constants: {
+      sideMenuWidth: 180
+    },
+    config: {
+    },
     navMenu: {},
     menuList: [],
     userInfo: {},
@@ -59,6 +63,12 @@ export default new Vuex.Store({
     },
   },
   getters: {
+    config(state, getters) {
+      return state.config
+    },
+    constants(state, getters) {
+      return state.constants;
+    },
     'collapseMenu': (state, getters) => {
       if (!state.config) {
         state.config = {}

@@ -1,32 +1,46 @@
 <template>
   <div id="element-menu">
-    <el-menu class="header-menu"
-             mode="horizontal"
-             menuTrigger="click"
-             @select="handleMenuClick"
-             :defaultActive="defaultActive"
-             :collapse="false"
-             ref="menu"
-             v-clickoutside="handleClickOutsideMenu"
-    >
-      <el-menu-item index="manage">管理后台</el-menu-item>
-      <el-menu-item index="profile">控制台</el-menu-item>
-      <el-menu-item index="docs">帮助文档</el-menu-item>
-      <el-menu-item index="user/group">团队管理</el-menu-item>
-      <el-menu-item index="message" v-show="true">消息中心</el-menu-item>
-      <el-submenu index="user" :withDrawOnMouseLeave="false">
-        <template slot="title"><i class="paas-icon-user"></i>{{userName}}</template>
-        <el-menu-item index="info"><span>用户中心</span></el-menu-item>
-        <el-menu-item index="logout"><i class="paas-icon-logout"></i><span>退出</span></el-menu-item>
-      </el-submenu>
-    </el-menu>
+    <div class="header" style="display: flex; justify-content: space-between; background-color: #fafafa; border-bottom: 1px solid #ebebeb;">
+      <div class="blank"></div>
+      <el-menu class="horizontal-menu"
+               mode="horizontal"
+               menuTrigger="hover"
+               @select="handleMenuClick"
+               :defaultActive="defaultActive"
+               :collapse="false"
+               ref="menu"
+               v-clickoutside="handleClickOutsideMenu"
+               style="display: inline-block;"
+               backgroundColor="#fafafa"
+               text-color="#909399"
+               active-text-color="#000"
+      >
+        <el-menu-item index="message" v-show="true"><i class="paas-icon-message"></i><span>消息中心</span></el-menu-item>
+        <el-submenu index="d">
+          <template slot="title"><i class="paas-icon-level-up"></i><span>页面跳转</span></template>
+          <el-menu-item index="manage"><i class="paas-icon-manage"></i><span>管理后台</span></el-menu-item>
+          <el-menu-item index="profile"><i class="paas-icon-profile"></i><span>控制台</span></el-menu-item>
+          <el-menu-item index="docs"><i class="paas-icon-docs"></i><span>帮助文档</span></el-menu-item>
+        </el-submenu>
+        <el-submenu index="user" :withDrawOnMouseLeave="false">
+          <template slot="title"><i class="paas-icon-user"></i><span>{{userName}}</span></template>
+          <el-menu-item index="info"><i class="paas-icon-user"></i><span>用户中心</span></el-menu-item>
+          <el-menu-item index="group"><i class="paas-icon-group"></i><span>团队管理</span></el-menu-item>
+          <el-menu-item index="logout"><i class="paas-icon-logout"></i><span>退出</span></el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </div>
 
     <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
       <el-radio-button :label="false">展开</el-radio-button>
       <el-radio-button :label="true">收起</el-radio-button>
     </el-radio-group>
     <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose"
-             :collapse="isCollapse" backgroundColor="gray">
+             :collapse="isCollapse"
+             background-color="#545c64"
+             text-color="#fff"
+             active-text-color="#ffd04b"
+             style="max-width: 300px;">
       <el-submenu index="1">
         <template slot="title">
           <i class="el-icon-location"></i>
@@ -43,6 +57,7 @@
         <el-submenu index="1-4">
           <span slot="title">选项4</span>
           <el-menu-item index="1-4-1">选项1</el-menu-item>
+          <el-menu-item index="1-4-2">选项2</el-menu-item>
         </el-submenu>
       </el-submenu>
       <el-menu-item index="2">
@@ -74,6 +89,31 @@
   </div>
 </template>
 <style lang="scss">
+  #element-menu {
+    .header {
+      height: 32px;
+      .el-menu.horizontal-menu {
+        padding-right: 30px;
+        /*border-bottom: solid 1px #e6e6e6;*/
+        border-bottom-width: 0px;
+        .el-submenu {
+          .el-submenu__title {
+            line-height: 32px;
+            height: 32px;
+            padding: 0px 8px;
+          }
+          & > .el-menu {
+            top: 36px;
+          }
+        }
+        .el-menu-item {
+          line-height: 32px;
+          height: 32px;
+          padding: 0px 8px;
+        }
+      }
+    }
+  }
   .color-section {
     .item {
       display: inline-block;
@@ -86,12 +126,13 @@
 </style>
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
+  import ElSubmenu from "../../../../element-ui/packages/menu/src/submenu";
   /**
    * this component is used in page:
    * profile, manage, user
    */
   export default {
-    directives: { Clickoutside },
+    components: {ElSubmenu}, directives: { Clickoutside },
     created() {
       console.log('created');
     },
@@ -103,7 +144,7 @@
         defaultActive: 'profile',
         userName: '路人甲',
 
-        isCollapse: true,
+        isCollapse: false,
 
         productList: [{
           title: 'product1',
@@ -123,6 +164,8 @@
           origin: '#F56C6C', hover: ''
         }, {
           origin: '#909399', hover: ''
+        }, {
+          origin: '#ffffff', hover: ''
         }]
       }
     },
