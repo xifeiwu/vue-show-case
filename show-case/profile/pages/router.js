@@ -5,6 +5,7 @@ import vChartsLine from './v-charts/line.vue';
 import element from './element';
 import notify from './element/notify.vue';
 import tree from './element/tree.vue';
+import slider from './element/slider.vue';
 import menu from './element/menu.vue';
 import input from './element/input.vue';
 
@@ -24,52 +25,84 @@ class Helper {
       redirect: '/element',
     }, {
       path: '/element',
+      name: 'element',
       redirect: '/element/menu',
       component: element,
       children: [{
         path: 'menu',
+        name: 'menu',
         component: menu
       }, {
         path: 'notify',
+        name: 'notify',
         component: notify
       }, {
         path: 'tree',
+        name: 'tree',
         component: tree
       }, {
+        path: 'slider',
+        name: 'slider',
+        component: slider
+      }, {
         path: 'input',
+        name: 'input',
         component: input
       }]
     }, {
-      path: '/echarts',
-      component: echarts
-    }, {
-      path: '/v-charts',
-      redirect: '/v-charts/line',
-      component: vCharts,
-      children: [{
-        path: 'line',
-        component: vChartsLine,
-      }]
-    }, {
       path: '/components',
+      name: 'components',
       component: components,
       children: [{
         path: 'vue-tree-navigation',
+        name: 'vue-tree-navigation',
         component: vueTreeNavigation
       }]
     }, {
       path: '/vue',
+      name: 'vue',
       component: vueIndex,
       children: [{
         path: 'transition',
+        name: 'transition',
         component: transition
+      }]
+    }, {
+      path: '/echarts',
+      name: 'echarts',
+      component: echarts
+    }, {
+      path: '/v-charts',
+      name: 'v-charts',
+      redirect: '/v-charts/line',
+      component: vCharts,
+      children: [{
+        path: 'line',
+        name: 'line',
+        component: vChartsLine,
       }]
     }];
 
     this.addRoutePath(null, this.richRouterConfig);
     this.routePathToConfig = this.getRoutePathToConfig();
+    console.log(this.richRouterConfig);
   }
 
+  /**
+   * 变量component，并使用func操作在component的每个元素
+   * @param func, used to each element in component tree
+   * @param component, target component to traverse
+   */
+  traverseComponent(func, component) {
+    if (Array.isArray(component)) {
+      component.forEach(this.traverseComponent.bind(this, func));
+    } else if ('object' === typeof(component)) {
+      func.call(this, component);
+      if (component.hasOwnProperty('children')) {
+        this.traverseComponent(func, component['children']);
+      }
+    }
+  }
 
   /**
    * traverse router config tree to add routerPath to all component:
@@ -140,17 +173,6 @@ class Helper {
     return vueRouterConfig;
   }
 
-  traverseComponent(func, component) {
-    if (Array.isArray(component)) {
-      component.forEach(this.traverseComponent.bind(this, func));
-    } else if ('object' === typeof(component)) {
-      func.call(this, component);
-      if (component.hasOwnProperty('children')) {
-        this.traverseComponent(func, component['children']);
-      }
-    }
-  }
-
   /**
    * get routePath to name, in the following format:
    * {
@@ -191,6 +213,49 @@ class Helper {
 
     this.traverseComponent(updateItem, this.richRouterConfig);
     return result;
+  }
+
+  getConfig4NavMenu() {
+    function updateItem(item) {
+      let keysMap = {
+        routePath: 'routePath',
+        name: 'name',
+        icon: 'icon',
+      };
+      let result = {};
+      for (let key in item) {
+        if (item.hasOwnProperty(key) && keysMap.hasOwnProperty(key)) {
+          if ('componentFile' === key) {
+            // result[keysMap[key]] = this.load(item[key]);
+          } else {
+            result[keysMap[key]] = item[key];
+          }
+        }
+      }
+      // filter config has not property 'name'
+      if (result.hasOwnProperty('name')) {
+        return result;
+      } else {
+        return null;
+      }
+    }
+
+    function traverseComponent(component) {
+      if (Array.isArray(component)) {
+        return component.map(traverseComponent.bind(this)).filter(it => {
+          return it;
+        });
+      } else if ('object' === typeof(component)) {
+        let config = updateItem.call(this, component);
+        if (config && component.hasOwnProperty('children')) {
+          config['children'] = traverseComponent(component['children']);
+        }
+        return config;
+      }
+    }
+
+    let menuConfig = traverseComponent(this.richRouterConfig);
+    return menuConfig;
   }
 }
 

@@ -13,16 +13,21 @@
             text-color="white"
             active-text-color="#409EFF"
             :defaultActive="activeSideMenuItem">
-      <el-submenu v-for="menu in navMenu.level2" :key="menu.name" :index="menu.router">
+      <el-submenu v-for="menu in navMenu.level2" :key="menu.name" :index="menu.routePath">
         <template slot="title">
-          <i v-if="menu.icon" :class="menu.icon"></i><span>{{menu.name}}</span>
+          <div class="icon-section">
+            <i v-if="menu.icon" :class="menu.icon"></i>
+            <span v-else class="abbr">{{menu.name[0].toUpperCase()}}</span>
+          </div>
+          <span>{{menu.name}}</span>
         </template>
-        <el-menu-item v-for="subMenu in menu.children" :key="subMenu.name" :index="subMenu.router">
+        <el-menu-item v-for="subMenu in menu.children" :key="subMenu.name" :index="subMenu.routePath">
           <i v-if="subMenu.icon" :class="subMenu.icon"></i><span>{{subMenu.name}}</span>
         </el-menu-item>
       </el-submenu>
-      <el-menu-item v-for="menu in navMenu.level1" :key="menu.name" :index="menu.router">
-        <i :class="menu.icon"></i>
+      <el-menu-item v-for="menu in navMenu.level1" :key="menu.name" :index="menu.routePath">
+        <i v-if="menu.icon" :class="menu.icon"></i>
+        <span v-else>{{menu.name[0].toUpperCase()}}</span>
         <template slot="title">
           <span>{{menu.name}}</span>
         </template>
@@ -65,6 +70,27 @@
     .el-menu {
       margin-top: 15px;
       width: 100%;
+      .icon-section {
+        display: inline-block;
+        justify-content: space-around;
+        align-items: center;
+        width: 16px;
+        height: 16px;
+        position: relative;
+        i[class^="paas-icon-"] {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+        }
+        .abbr {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          font-size: 16px;
+          line-height: 100%;
+          font-weight: bold;
+        }
+      }
     }
     .toggle {
       position: absolute;
@@ -92,30 +118,11 @@
 </style>
 
 <script>
-//  $header-background-color: #3976EF;
-//  $header-background-color: #e7e7e7;
-//  $split-line-color: #e7e7e7;
-//  $aside-width: 200px;
-//
-//  $main-background: #F2F6FC;
-//
-//  $menu-background: white;
-//  $menu-background-hover: #ecf5ff;
-//  $menu-background-active: #409EFF;
-//  $menu-font-color: #2d2f33;
-//  $menu-font-color-hover: #2d2f33;
-//  $menu-font-color-active: white;
-//
-//  $menu-background: rgb(0, 21, 41);
-//  $menu-background-hover: rgb(0, 21, 41);
-//  $menu-background-active: $main-background;
-//  $menu-font-color: rgba(255, 255, 255, 0.7);
-//  $menu-font-color-hover: white;
-//  $menu-font-color-active: black;
   import {mapGetters} from 'vuex';
   export default {
     created() {
-      console.log(this.$storeHelper.constants);
+      this.navMenu = this.getMenuConfig();
+      console.log(this.navMenu);
     },
     mounted() {
 
@@ -131,99 +138,91 @@
         }
         return value;
       },
-      navMenu() {
-        const menuConfig = [{
-          "id": 1,
-          "name": "element",
-          "router": "/element",
-          "icon": "paas-icon-fa-caret-right",
-          children: [{
-            "id": 100,
-            "name": "menu",
-            "router": "/element/menu",
-            "icon": "paas-icon-fa-caret-right",
-          }, {
-            "id": 101,
-            "name": "notify",
-            "router": "/element/notify",
-            "icon": "paas-icon-fa-caret-right",
-          }, {
-            "id": 102,
-            "name": "tree",
-            "router": "/element/tree",
-            "icon": "paas-icon-fa-caret-right",
-          }, {
-            "id": 103,
-            "name": "input",
-            "router": "/element/input",
-            "icon": "paas-icon-fa-caret-right",
-          }]
-        }, {
-          "id": 2,
-          "name": "components",
-          "router": "/components",
-          "icon": "paas-icon-key",
-          children: [{
-            id: 201,
-            "name": "vue-tree-navigation",
-            "router": "/components/vue-tree-navigation",
-            "icon": "paas-icon-key",
-          }]
-        }, {
-          "id": 3,
-          "name": "vue",
-          "router": "/vue",
-          "icon": "paas-icon-key",
-          children: [{
-            id: 201,
-            "name": "transition",
-            "router": "/vue/transition",
-            "icon": "paas-icon-key",
-          }]
-        }, {
-          "id": 4,
-          "name": "echarts",
-          "router": "/echarts",
-          "icon": "paas-icon-config"
-        }, {
-          "id": 5,
-          "name": "v-charts",
-          "router": "/v-charts",
-          "icon": "paas-icon-config",
-          children: [{
-            "id": 500,
-            "name": "line",
-            "router": "/v-charts/line",
-            "icon": "paas-icon-config",
-          }]
-        }];
-//        const componentsList = [{
-//          "id": 1000,
+//      navMenu() {
+//        const menuConfig = [{
+//          "id": 1,
+//          "name": "element",
+//          "router": "/element",
+//          children: [{
+//            "id": 100,
+//            "name": "menu",
+//            "router": "/element/menu",
+//            "icon": "paas-icon-fa-caret-right",
+//          }, {
+//            "id": 101,
+//            "name": "notify",
+//            "router": "/element/notify",
+//            "icon": "paas-icon-fa-caret-right",
+//          }, {
+//            "id": 102,
+//            "name": "tree",
+//            "router": "/element/tree",
+//            "icon": "paas-icon-fa-caret-right",
+//          }, {
+//            "id": 103,
+//            "name": "input",
+//            "router": "/element/input",
+//            "icon": "paas-icon-fa-caret-right",
+//          }]
+//        }, {
+//          "id": 2,
 //          "name": "components",
 //          "router": "/components",
 //          "icon": "paas-icon-key",
 //          children: [{
+//            id: 201,
 //            "name": "vue-tree-navigation",
 //            "router": "/components/vue-tree-navigation",
 //            "icon": "paas-icon-key",
 //          }]
+//        }, {
+//          "id": 3,
+//          "name": "vue",
+//          "router": "/vue",
+//          "icon": "paas-icon-key",
+//          children: [{
+//            id: 201,
+//            "name": "transition",
+//            "router": "/vue/transition",
+//            "icon": "paas-icon-key",
+//          }]
+//        }, {
+//          "id": 4,
+//          "name": "echarts",
+//          "router": "/echarts",
+//          "icon": "paas-icon-config"
+//        }, {
+//          "id": 5,
+//          "name": "v-charts",
+//          "router": "/v-charts",
+//          "icon": "paas-icon-config",
+//          children: [{
+//            "id": 500,
+//            "name": "line",
+//            "router": "/v-charts/line",
+//            "icon": "paas-icon-config",
+//          }]
 //        }];
-        const result = {
-          level1: [],
-          level2: []
-        };
-        menuConfig.forEach(it => {
-          if (it.hasOwnProperty('children')) {
-            result.level2.push(it);
-          } else {
-            result.level1.push(it);
-          }
-        });
-        return result;
-      }
+//        const result = {
+//          level1: [],
+//          level2: []
+//        };
+//        menuConfig.forEach(it => {
+//          if (it.hasOwnProperty('children')) {
+//            result.level2.push(it);
+//          } else {
+//            result.level1.push(it);
+//          }
+//        });
+//        return result;
+//      }
     },
     data() {
       return {
+        navMenu: {
+          level2: [],
+          level1: []
+        }
       }
     },
     props: {
@@ -256,6 +255,21 @@
           collapseMenu: !this.collapseMenu
         });
       },
+      getMenuConfig() {
+        const menuConfig = this.$router.helper.getConfig4NavMenu();
+        const result = {
+          level1: [],
+          level2: []
+        };
+        menuConfig.forEach(it => {
+          if (it.hasOwnProperty('children')) {
+            result.level2.push(it);
+          } else {
+            result.level1.push(it);
+          }
+        });
+        return result;
+      }
     }
   }
 </script>
