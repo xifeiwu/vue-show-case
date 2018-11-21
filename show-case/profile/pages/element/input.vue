@@ -1,32 +1,88 @@
 <template>
-  <el-row class="demo-autocomplete">
-    <el-col :span="12">
-      <div class="sub-title">激活即列出输入建议</div>
-      <el-autocomplete
-              class="inline-input"
-              v-model="state1"
-              :fetch-suggestions="querySearch"
+  <div id="element-input">
+    <div class="section-el-input">
+      <el-input v-model="input" placeholder="请输入内容" size="medium"></el-input>
+      <el-input v-model="input" placeholder="size-small" size="small"></el-input>
+      <el-input v-model="input" placeholder="size-mini" size="mini"></el-input>
+      <el-input v-model="input" placeholder="size-mini-disable" size="mini" :disabled="true"></el-input>
+      <el-input v-model="input" placeholder="可清空" :clearable="true"></el-input>
+      <br>
+      <el-input v-model="input" placeholder="请选择日期" size="medium" suffix-icon="el-icon-date"></el-input>
+      <el-input v-model="input" placeholder="请选择日期" size="mini" suffix-icon="el-icon-date"></el-input>
+      <el-input v-model="input" placeholder="请输入内容" prefix-icon="el-icon-search"></el-input>
+      <br>
+      <el-input v-model="input" placeholder="请选择日期">
+        <i slot="suffix" class="el-input__icon el-icon-date"></i>
+      </el-input>
+      <el-input
               placeholder="请输入内容"
-              @select="handleSelect"
-      ></el-autocomplete>
-    </el-col>
-    <el-col :span="12">
-      <div class="sub-title">输入后匹配输入建议</div>
-      <el-autocomplete
-              class="inline-input"
-              v-model="state2"
-              :fetch-suggestions="querySearch"
+              v-model="input">
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-input>
+      <br>
+      <el-input v-model="input" placeholder="请选择日期">
+        <i slot="prefix" class="el-input__icon el-icon-date"></i>
+        <template slot="prepend">Http://</template>
+      </el-input>
+    </div>
+    <div class="section-el-textarea">
+      <el-input
+              type="textarea"
+              autosize
               placeholder="请输入内容"
-              :trigger-on-focus="false"
-              @select="handleSelect"
-      ></el-autocomplete>
-    </el-col>
-  </el-row>
+              v-model="textarea2">
+      </el-input>
+      <div style="margin: 20px 0;"></div>
+      <el-input
+              type="textarea"
+              :autosize="{ minRows: 2, maxRows: 4}"
+              placeholder="autosize: minRows: 2, maxRows: 4"
+              v-model="textarea3">
+      </el-input>
+    </div>
+    <el-row class="demo-autocomplete">
+      <el-col :span="12">
+        <div class="sub-title">激活即列出输入建议</div>
+        <el-autocomplete
+                class="inline-input"
+                v-model="state1"
+                :fetch-suggestions="querySearch"
+                placeholder="请输入内容"
+                @select="handleSelect"
+        ></el-autocomplete>
+      </el-col>
+      <el-col :span="12">
+        <div class="sub-title">输入后匹配输入建议</div>
+        <el-autocomplete
+                class="inline-input"
+                v-model="state2"
+                :fetch-suggestions="querySearch"
+                placeholder="请输入内容"
+                :trigger-on-focus="false"
+                @select="handleSelect"
+        ></el-autocomplete>
+      </el-col>
+    </el-row>
+  </div>
 </template>
+<style lang="scss">
+  #element-input {
+    padding: 5px;
+    .section-el-input {
+      .el-input {
+        max-width: 200px;
+      }
+    }
+  }
+</style>
 <script>
   export default {
     data() {
       return {
+        input: '',
+        textarea2: '',
+        textarea3: '',
+
         restaurants: [],
         state1: '',
         state2: ''
