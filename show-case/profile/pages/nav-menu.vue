@@ -9,9 +9,9 @@
             :collapseTransition="false"
             @select="handleAsideMenuSelect"
             :collapse="collapseMenu"
-            background-color="#324157"
-            text-color="white"
-            active-text-color="#409EFF"
+            background-color="#545c64"
+            text-color="#fff"
+            active-text-color="#ffd04b"
             :defaultActive="activeSideMenuItem">
       <el-submenu v-for="menu in navMenu.level2" :key="menu.name" :index="menu.routePath">
         <template slot="title">
@@ -50,7 +50,8 @@
     }
     box-sizing: border-box;
     height: 100%;
-    background: #324157;
+    /*background: #324157;*/
+    background-color: #545c64;
 
     .img {
       line-height: 45px;
@@ -120,9 +121,11 @@
 <script>
   import {mapGetters} from 'vuex';
   export default {
+//    background-color="#324157"
+//    text-color="white"
+//    active-text-color="#409EFF"
     created() {
       this.navMenu = this.getMenuConfig();
-      console.log(this.navMenu);
     },
     mounted() {
 
