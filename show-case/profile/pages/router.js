@@ -9,8 +9,8 @@ import slider from './element/slider.vue';
 import menu from './element/menu.vue';
 import input from './element/input.vue';
 
-import components from './components';
-import vueTreeNavigation from './components/vue-tree-navigation.vue';
+import custom from './custom';
+import vueTreeNavigation from './custom/vue-tree-navigation.vue';
 
 import vueIndex from './vue';
 import transition from './vue/transition/transition.vue';
@@ -50,9 +50,9 @@ class Helper {
         component: input
       }]
     }, {
-      path: '/components',
-      name: 'components',
-      component: components,
+      path: '/custom',
+      name: 'custom',
+      component: custom,
       children: [{
         path: 'vue-tree-navigation',
         name: 'vue-tree-navigation',
