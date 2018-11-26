@@ -11,6 +11,7 @@ import input from './element/input.vue';
 
 import custom from './custom';
 import vueTreeNavigation from './custom/vue-tree-navigation.vue';
+import others from './custom/others.vue';
 
 import vueIndex from './vue';
 import transition from './vue/transition/transition.vue';
@@ -54,6 +55,10 @@ class Helper {
       name: 'custom',
       component: custom,
       children: [{
+        path: 'others',
+        name: 'others',
+        component: others
+      }, {
         path: 'vue-tree-navigation',
         name: 'vue-tree-navigation',
         component: vueTreeNavigation

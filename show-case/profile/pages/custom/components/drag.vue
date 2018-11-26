@@ -1,12 +1,12 @@
 <template>
   <div
-    class="com-drag"
+    class="custom-drag"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
     @mousedown="onButtonDown"
     @touchstart="onButtonDown"
     :class="{ 'hover': hovering, 'dragging': dragging }"
-    :style="wrapperStyle"
+    :style="posStyle"
     ref="button"
     tabindex="0"
     @focus="handleMouseEnter"
@@ -16,11 +16,14 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <span>{{ formatValue }}</span>
+    <div class="com-drag__button">
+      <span v-if="false">{{ status }}</span>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
+
   $namespace: 'com';
   $element-separator: '__';
   $modifier-separator: '--';
@@ -67,29 +70,77 @@
     }
   }
 
+  @mixin utils-vertical-center {
+    $selector: &;
+    @at-root {
+      #{$selector}::after {
+        display: inline-block;
+        content: "";
+        height: 100%;
+        vertical-align: middle
+      }
+    }
+  }
+
 
   @include b(drag) {
+    position: absolute;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    user-select: none;
-    border: solid 2px #409EFF;
-    background-color: #fff;
-    @include e(inner) {
+    /*border: 1px solid gray;*/
+    text-align: center;
+    @include utils-vertical-center;
 
+    @include e(button) {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      user-select: none;
+      border: solid 2px #409EFF;
+      background-color: #fff;
+      display: inline-block;
+      vertical-align: middle;
+
+      &:hover,
+      &.hover {
+        transform: scale(1.2);
+        cursor: grab;
+      }
+
+      &.dragging {
+        cursor: grabbing;
+      }
     }
   }
 </style>
 <script>
 
   export default {
-    name: 'ComDrag',
+    name: 'CustomDrag',
+
+    mounted() {
+      this.posX = this.x;
+      this.posY = this.y;
+    },
 
     props: {
       value: {
         type: Number,
         default: 0
       },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
+      x: {
+        type: Number,
+        default: 0
+      },
+      y: {
+        type: Number,
+        default: 0
+      },
+
     },
 
     data() {
@@ -97,19 +148,26 @@
         hovering: false,
         dragging: false,
         isClick: false,
+        posX: 0,
+        posY: 0,
+        startPosX: null,
+        startPosY: null,
         startX: 0,
-        currentX: 0,
         startY: 0,
+        currentX: 0,
         currentY: 0,
-        startPosition: 0,
-        newPosition: null,
+        dx: 0,
+        dy: 0,
         oldValue: this.value
       };
     },
 
     computed: {
-      disabled() {
-        return false;
+      status() {
+        return 'status';
+      },
+      posStyle() {
+        return `top: ${this.posY}px; left: ${this.posX}px`;
       }
     },
 
@@ -128,8 +186,8 @@
       },
 
       handleMouseEnter() {
-//        this.hovering = true;
-//        this.displayTooltip();
+        this.hovering = true;
+        this.displayTooltip();
       },
 
       handleMouseLeave() {
@@ -138,16 +196,17 @@
       },
 
       onButtonDown(event) {
-//        if (this.disabled) return;
-//        event.preventDefault();
-//        this.onDragStart(event);
-//        window.addEventListener('mousemove', this.onDragging);
-//        window.addEventListener('touchmove', this.onDragging);
-//        window.addEventListener('mouseup', this.onDragEnd);
-//        window.addEventListener('touchend', this.onDragEnd);
-//        window.addEventListener('contextmenu', this.onDragEnd);
+        if (this.disabled) return;
+        event.preventDefault();
+        this.onDragStart(event);
+        window.addEventListener('mousemove', this.onDragging);
+        window.addEventListener('touchmove', this.onDragging);
+        window.addEventListener('mouseup', this.onDragEnd);
+        window.addEventListener('touchend', this.onDragEnd);
+        window.addEventListener('contextmenu', this.onDragEnd);
       },
       onLeftKeyDown() {
+        console.log('keydown');
 //        if (this.disabled) return;
 //        this.newPosition = parseFloat(this.currentPosition) - this.step / (this.max - this.min) * 100;
 //        this.setPosition(this.newPosition);
@@ -157,64 +216,61 @@
 //        this.newPosition = parseFloat(this.currentPosition) + this.step / (this.max - this.min) * 100;
 //        this.setPosition(this.newPosition);
       },
+
       onDragStart(event) {
-//        this.dragging = true;
-//        this.isClick = true;
-//        if (event.type === 'touchstart') {
-//          event.clientY = event.touches[0].clientY;
-//          event.clientX = event.touches[0].clientX;
-//        }
-//        if (this.vertical) {
-//          this.startY = event.clientY;
-//        } else {
-//          this.startX = event.clientX;
-//        }
-//        this.startPosition = parseFloat(this.currentPosition);
-//        this.newPosition = this.startPosition;
+        this.dragging = true;
+        this.isClick = true;
+        if (event.type === 'touchstart') {
+          event.clientY = event.touches[0].clientY;
+          event.clientX = event.touches[0].clientX;
+        }
+        this.startX = event.clientX;
+        this.startY = event.clientY;
+
+        this.startPosX = this.posX;
+        this.startPosY = this.posY;
       },
 
       onDragging(event) {
-//        if (this.dragging) {
-//          this.isClick = false;
-//          this.displayTooltip();
+        if (this.dragging) {
+          this.isClick = false;
+          this.displayTooltip();
 //          this.$parent.resetSize();
-//          let diff = 0;
-//          if (event.type === 'touchmove') {
-//            event.clientY = event.touches[0].clientY;
-//            event.clientX = event.touches[0].clientX;
-//          }
-//          if (this.vertical) {
-//            this.currentY = event.clientY;
-//            diff = (this.startY - this.currentY) / this.$parent.sliderSize * 100;
-//          } else {
-//            this.currentX = event.clientX;
-//            diff = (this.currentX - this.startX) / this.$parent.sliderSize * 100;
-//          }
-//          this.newPosition = this.startPosition + diff;
-//          this.setPosition(this.newPosition);
-//        }
+          let diff = 0;
+          if (event.type === 'touchmove') {
+            event.clientY = event.touches[0].clientY;
+            event.clientX = event.touches[0].clientX;
+          }
+          this.currentX = event.clientX;
+          this.currentY = event.clientY;
+          this.dx = this.currentX - this.startX;
+          this.dy = this.currentY - this.startY;
+//          console.log(this.dx, this.dy);
+          this.posX = this.startPosX + this.dx;
+          this.posY = this.startPosY + this.dy;
+        }
       },
 
       onDragEnd() {
-//        if (this.dragging) {
-//          /*
-//           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
-//           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
-//           */
-//          setTimeout(() => {
-//            this.dragging = false;
-//            this.hideTooltip();
-//            if (!this.isClick) {
+        if (this.dragging) {
+          /*
+           * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
+           * 不使用 preventDefault 是因为 mouseup 和 click 没有注册在同一个 DOM 上
+           */
+          setTimeout(() => {
+            this.dragging = false;
+            this.hideTooltip();
+            if (!this.isClick) {
 //              this.setPosition(this.newPosition);
 //              this.$parent.emitChange();
-//            }
-//          }, 0);
-//          window.removeEventListener('mousemove', this.onDragging);
-//          window.removeEventListener('touchmove', this.onDragging);
-//          window.removeEventListener('mouseup', this.onDragEnd);
-//          window.removeEventListener('touchend', this.onDragEnd);
-//          window.removeEventListener('contextmenu', this.onDragEnd);
-//        }
+            }
+          }, 0);
+          window.removeEventListener('mousemove', this.onDragging);
+          window.removeEventListener('touchmove', this.onDragging);
+          window.removeEventListener('mouseup', this.onDragEnd);
+          window.removeEventListener('touchend', this.onDragEnd);
+          window.removeEventListener('contextmenu', this.onDragEnd);
+        }
       },
 
       setPosition(newPosition) {
