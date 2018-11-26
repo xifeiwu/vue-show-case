@@ -22,12 +22,20 @@
           <span>{{menu.name}}</span>
         </template>
         <el-menu-item v-for="subMenu in menu.children" :key="subMenu.name" :index="subMenu.routePath">
-          <i v-if="subMenu.icon" :class="subMenu.icon"></i><span>{{subMenu.name}}</span>
+          <div class="icon-section">
+            <i v-if="subMenu.icon" :class="subMenu.icon"></i>
+            <span v-else class="abbr">{{subMenu.name[0].toUpperCase()}}</span>
+          </div>
+          <template slot="title">
+            <span>{{subMenu.name}}</span>
+          </template>
         </el-menu-item>
       </el-submenu>
       <el-menu-item v-for="menu in navMenu.level1" :key="menu.name" :index="menu.routePath">
-        <i v-if="menu.icon" :class="menu.icon"></i>
-        <span v-else>{{menu.name[0].toUpperCase()}}</span>
+        <div class="icon-section">
+          <i v-if="menu.icon" :class="menu.icon"></i>
+          <span v-else class="abbr">{{menu.name[0].toUpperCase()}}</span>
+        </div>
         <template slot="title">
           <span>{{menu.name}}</span>
         </template>
