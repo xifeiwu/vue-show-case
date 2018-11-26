@@ -15,6 +15,7 @@ import others from './custom/others.vue';
 
 import vueIndex from './vue';
 import transition from './vue/transition/transition.vue';
+import event from './vue/event.vue';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -71,6 +72,10 @@ class Helper {
         path: 'transition',
         name: 'transition',
         component: transition
+      }, {
+        path: 'event',
+        name: 'event',
+        component: event
       }]
     }, {
       path: '/echarts',
