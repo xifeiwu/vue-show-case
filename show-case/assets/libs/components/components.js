@@ -1,6 +1,6 @@
 const ClipBoard = require('element-ui/components/clipboard');
 
-import vueTreeNavigation from '$components/vue-tree-navigation';
+import vueTreeNavigation from '$components/custom/vue-tree-navigation';
 
 const components = [
   vueTreeNavigation
