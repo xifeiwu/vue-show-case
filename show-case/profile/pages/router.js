@@ -11,6 +11,7 @@ import input from './element/input.vue';
 
 import custom from './custom';
 import vueTreeNavigation from './custom/vue-tree-navigation.vue';
+import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
 
 import vueIndex from './vue';
@@ -63,6 +64,10 @@ class Helper {
         path: 'vue-tree-navigation',
         name: 'vue-tree-navigation',
         component: vueTreeNavigation
+      }, {
+        path: 'clipboard',
+        name: 'clipboard',
+        component: ClipBoard
       }]
     }, {
       path: '/vue',
