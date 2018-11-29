@@ -21,6 +21,10 @@
         <span class="demonstration">禁用</span>
         <el-slider v-model="value5" disabled></el-slider>
       </div>
+      <div class="block">
+        <span class="demonstration">small size</span>
+        <el-slider v-model="value2" size="small"></el-slider>
+      </div>
     </div>
   </div>
 </template>
