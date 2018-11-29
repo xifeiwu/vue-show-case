@@ -7,8 +7,8 @@
     @touchstart="onButtonDown"
     :class="{ 'hover': hovering, 'dragging': dragging }"
     :style="posStyle"
-    ref="button"
     tabindex="0"
+    ref="button"
     @focus="handleMouseEnter"
     @blur="handleMouseLeave"
     @keydown.left="onLeftKeyDown"
@@ -16,7 +16,7 @@
     @keydown.down.prevent="onLeftKeyDown"
     @keydown.up.prevent="onRightKeyDown"
   >
-    <div class="com-drag__button">
+    <div class="custom-drag__button">
       <span v-if="false">{{ status }}</span>
     </div>
   </div>
@@ -24,7 +24,7 @@
 
 <style lang="scss">
 
-  $namespace: 'com';
+  $namespace: 'custom';
   $element-separator: '__';
   $modifier-separator: '--';
   $state-prefix: 'is-';
@@ -95,7 +95,7 @@
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      user-select: none;
+      /*user-select: none;*/
       border: solid 2px #409EFF;
       background-color: #fff;
       display: inline-block;
@@ -167,7 +167,9 @@
         return 'status';
       },
       posStyle() {
-        return `top: ${this.posY}px; left: ${this.posX}px`;
+        var style = `top: ${this.posY}px; left: ${this.posX}px`;
+//        console.log(style);
+        return style;
       }
     },
 
@@ -245,13 +247,12 @@
           this.currentY = event.clientY;
           this.dx = this.currentX - this.startX;
           this.dy = this.currentY - this.startY;
-//          console.log(this.dx, this.dy);
           this.posX = this.startPosX + this.dx;
           this.posY = this.startPosY + this.dy;
         }
       },
 
-      onDragEnd() {
+      onDragEnd(evt) {
         if (this.dragging) {
           /*
            * 防止在 mouseup 后立即触发 click，导致滑块有几率产生一小段位移
@@ -271,6 +272,8 @@
           window.removeEventListener('touchend', this.onDragEnd);
           window.removeEventListener('contextmenu', this.onDragEnd);
         }
+//        console.log(evt.target);
+//        console.log(document.activeElement);
       },
 
       setPosition(newPosition) {

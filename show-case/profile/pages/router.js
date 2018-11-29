@@ -95,7 +95,7 @@ class Helper {
 
     this.addRoutePath(null, this.richRouterConfig);
     this.routePathToConfig = this.getRoutePathToConfig();
-    console.log(this.richRouterConfig);
+    // console.log(this.richRouterConfig);
   }
 
   /**
