@@ -126,13 +126,12 @@
 </style>
 <script>
   import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import ElSubmenu from "../../../../element-ui/packages/menu/src/submenu";
   /**
    * this component is used in page:
    * profile, manage, user
    */
   export default {
-    components: {ElSubmenu}, directives: { Clickoutside },
+    directives: { Clickoutside },
     created() {
       console.log('created');
     },

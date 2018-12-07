@@ -19,7 +19,7 @@
 
   export default {
     components: {
-      ElButton, CustomDrag,
+      CustomDrag,
       jsx
     }
   }
