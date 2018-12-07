@@ -1,6 +1,6 @@
 <template>
   <div id="components_vue-tree-navigation">
-    <vue-tree-navigation :items="items" :defaultOpenLevel="1" />
+    <custom-tree-navigation :items="items" :defaultOpenLevel="1" />
   </div>
 </template>
 

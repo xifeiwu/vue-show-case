@@ -8,9 +8,10 @@ import tree from './element/tree.vue';
 import slider from './element/slider.vue';
 import menu from './element/menu.vue';
 import input from './element/input.vue';
+import elSteps from './element/steps.vue'
 
 import custom from './custom';
-import vueTreeNavigation from './custom/vue-tree-navigation.vue';
+import CustomTreeNavigation from './custom/tree-navigation.vue';
 import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
 
@@ -51,6 +52,10 @@ class Helper {
         path: 'input',
         name: 'input',
         component: input
+      }, {
+        path: 'steps',
+        name: 'steps',
+        component: elSteps
       }]
     }, {
       path: '/custom',
@@ -61,9 +66,9 @@ class Helper {
         name: 'others',
         component: others
       }, {
-        path: 'vue-tree-navigation',
-        name: 'vue-tree-navigation',
-        component: vueTreeNavigation
+        path: 'tree-navigation',
+        name: 'tree-navigation',
+        component: CustomTreeNavigation
       }, {
         path: 'clipboard',
         name: 'clipboard',
