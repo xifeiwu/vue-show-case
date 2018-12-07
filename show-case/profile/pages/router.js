@@ -1,6 +1,9 @@
-import echarts from './echarts.vue';
-import vCharts from './v-charts/index.vue';
-import vChartsLine from './v-charts/line.vue';
+import h5 from './h5';
+import h5Svg from './h5/svg.vue';
+
+import vueIndex from './vue';
+import transition from './vue/transition/transition.vue';
+import event from './vue/event.vue';
 
 import element from './element';
 import notify from './element/notify.vue';
@@ -15,9 +18,9 @@ import CustomTreeNavigation from './custom/tree-navigation.vue';
 import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
 
-import vueIndex from './vue';
-import transition from './vue/transition/transition.vue';
-import event from './vue/event.vue';
+import echarts from './echarts.vue';
+import vCharts from './v-charts/index.vue';
+import vChartsLine from './v-charts/line.vue';
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -27,6 +30,29 @@ class Helper {
     this.richRouterConfig = [{
       path: '/',
       redirect: '/element',
+    }, {
+      path: '/h5',
+      name: 'h5',
+      component: h5,
+      redirect: '/h5/svg',
+      children: [{
+        path: 'svg',
+        name: 'svg',
+        component: h5Svg,
+      }]
+    }, {
+      path: '/vue',
+      name: 'vue',
+      component: vueIndex,
+      children: [{
+        path: 'transition',
+        name: 'transition',
+        component: transition
+      }, {
+        path: 'event',
+        name: 'event',
+        component: event
+      }]
     }, {
       path: '/element',
       name: 'element',
@@ -73,19 +99,6 @@ class Helper {
         path: 'clipboard',
         name: 'clipboard',
         component: ClipBoard
-      }]
-    }, {
-      path: '/vue',
-      name: 'vue',
-      component: vueIndex,
-      children: [{
-        path: 'transition',
-        name: 'transition',
-        component: transition
-      }, {
-        path: 'event',
-        name: 'event',
-        component: event
       }]
     }, {
       path: '/echarts',

@@ -27,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
         { from: /^\/$/, to: '/profile.html' },
-        { from: /^\/(element|echarts|v-charts|custom|vue)/, to: '/profile.html' },
+        { from: /^\/(h5|vue|element|custom|echarts|v-charts)/, to: '/profile.html' },
       ],
     },
     hot: true,
