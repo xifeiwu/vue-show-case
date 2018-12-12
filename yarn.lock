@@ -1665,9 +1665,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codemirror@^5.32.0, codemirror@^5.39.0:
-  version "5.39.0"
-  resolved "http://registry.npm.taobao.org/codemirror/download/codemirror-5.39.0.tgz#4654f7d2f7e525e04a62e72d9482348ccb37dce5"
+codemirror@^5.32.0:
+  version "5.42.0"
+  resolved "http://registry.npm.taobao.org/codemirror/download/codemirror-5.42.0.tgz#2d5b640ed009e89dee9ed8a2a778e2a25b65f9eb"
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -2234,8 +2234,8 @@ detect-node@^2.0.3:
   resolved "https://registry.yarnpkg.com/detect-node/-/detect-node-2.0.3.tgz#a2033c09cc8e158d37748fbde7507832bd6ce127"
 
 diff-match-patch@^1.0.0:
-  version "1.0.1"
-  resolved "http://registry.npm.taobao.org/diff-match-patch/download/diff-match-patch-1.0.1.tgz#d5f880213d82fbc124d2b95111fb3c033dbad7fa"
+  version "1.0.4"
+  resolved "http://registry.npm.taobao.org/diff-match-patch/download/diff-match-patch-1.0.4.tgz#6ac4b55237463761c4daf0dc603eb869124744b1"
 
 diffie-hellman@^5.0.0:
   version "5.0.2"
@@ -7768,7 +7768,7 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-codemirror@^4.0.5:
+vue-codemirror@4.0.5:
   version "4.0.5"
   resolved "http://registry.npm.taobao.org/vue-codemirror/download/vue-codemirror-4.0.5.tgz#3a784d454fbfb17ce769b9fc90f10e9868687ecb"
   dependencies:

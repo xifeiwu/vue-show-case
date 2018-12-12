@@ -22,6 +22,9 @@ import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
 import vChartsLine from './v-charts/line.vue';
 
+import codeMirror from './code-mirror';
+import codeMirrorExample from './code-mirror/example.vue';
+
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
@@ -113,6 +116,15 @@ class Helper {
         path: 'line',
         name: 'line',
         component: vChartsLine,
+      }]
+    }, {
+      path: '/code-mirror',
+      name: 'code-mirror',
+      component: codeMirror,
+      children: [{
+        path: 'example',
+        name: 'example',
+        component: codeMirrorExample
       }]
     }];
 
