@@ -4,6 +4,7 @@
     <jsx>
       <div slot="title">the demo for jsx</div><el-button>click Me!</el-button>
     </jsx>
+    <click-to-edit v-model="gitlab"></click-to-edit>
   </div>
 </template>
 
@@ -15,11 +16,18 @@
 </style>
 <script>
   import CustomDrag from './components/drag.vue';
+  import ClickToEdit from './components/click-to-edit.vue';
   import jsx from './components/jsx';
 
   export default {
+    data() {
+      return {
+        gitlab: 'http://www.gitlab.com/show-case'
+      }
+    },
     components: {
       CustomDrag,
+      ClickToEdit,
       jsx
     }
   }
