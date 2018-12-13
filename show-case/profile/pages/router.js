@@ -17,6 +17,7 @@ import custom from './custom';
 import CustomTreeNavigation from './custom/tree-navigation.vue';
 import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
+import customSvgIcon from './custom/svg-icon.vue';
 
 import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
@@ -102,6 +103,10 @@ class Helper {
         path: 'clipboard',
         name: 'clipboard',
         component: ClipBoard
+      }, {
+        path: 'svg-icon',
+        name: 'svg-icon',
+        component: customSvgIcon
       }]
     }, {
       path: '/echarts',

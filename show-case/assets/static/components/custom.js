@@ -1,9 +1,11 @@
 import ClipBoard from '$components/custom/clipboard';
 import CustomTreeNavigation from '$components/custom/tree-navigation';
+import svgIcon from '$components/custom/svg-icon';
 
 const components = [
   ClipBoard,
-  CustomTreeNavigation
+  CustomTreeNavigation,
+  svgIcon
 ];
 
 export default {
