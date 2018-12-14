@@ -47,7 +47,7 @@
     transform-origin: center top;
   }
   .el-zoom-in-top-enter,
-  .el-zoom-in-top-leave-active {
+  .el-zoom-in-top-leave {
     opacity: 0;
     transform: scaleY(0);
   }

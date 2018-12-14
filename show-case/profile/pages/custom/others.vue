@@ -4,7 +4,7 @@
     <jsx>
       <div slot="title">the demo for jsx</div><el-button>click Me!</el-button>
     </jsx>
-    <click-to-edit v-model="gitlab"></click-to-edit>
+    <click-to-edit v-model="gitBranch"></click-to-edit>
   </div>
 </template>
 
@@ -22,7 +22,8 @@
   export default {
     data() {
       return {
-        gitlab: 'http://www.gitlab.com/show-case'
+        gitlab: 'http://www.gitlab.com/show-case',
+        gitBranch: ''
       }
     },
     components: {
