@@ -4,7 +4,7 @@
     <jsx>
       <div slot="title">the demo for jsx</div><el-button>click Me!</el-button>
     </jsx>
-    <click-to-edit v-model="gitBranch"></click-to-edit>
+    <click-to-edit-input v-model="gitBranch"></click-to-edit-input>
   </div>
 </template>
 
