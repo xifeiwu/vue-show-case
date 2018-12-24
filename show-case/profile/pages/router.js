@@ -7,6 +7,7 @@ import event from './vue/event.vue';
 
 import element from './element';
 import notify from './element/notify.vue';
+import elForm from './element/form.vue';
 import tree from './element/tree.vue';
 import slider from './element/slider.vue';
 import menu from './element/menu.vue';
@@ -63,6 +64,10 @@ class Helper {
       redirect: '/element/menu',
       component: element,
       children: [{
+        path: 'form',
+        name: 'form',
+        component: elForm
+      }, {
         path: 'menu',
         name: 'menu',
         component: menu
