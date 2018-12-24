@@ -40,8 +40,9 @@
           <el-radio label="线下场地免费"></el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="活动形式" prop="desc">
-        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+      <el-form-item label="活动形式" prop="action" :multiFields="true">
+        <el-input type="input" placeholder="活动形式" v-model="ruleForm.action.title"></el-input>
+        <el-input type="textarea" placeholder="活动描述" v-model="ruleForm.action.desc"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -70,7 +71,10 @@
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          action: {
+            title: '',
+            desc: ''
+          }
         },
         rules: {
           name: [
@@ -92,19 +96,30 @@
           resource: [
             { required: true, message: '请选择活动资源', trigger: 'change' }
           ],
-          desc: [
-            { required: true, message: '请填写活动形式', trigger: 'blur' }
-          ]
+          action: {
+            type: 'object',
+            required: true,
+            trigger: ['blur', 'change'],
+            fields: {
+              title: [
+                {required: true, message: '请填写活动名称', trigger: 'blur'}
+              ],
+              desc: [
+                {required: true, message: '请填写活动描述', trigger: 'blur'}
+              ]
+            }
+          }
         }
       };
     },
     methods: {
       submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
+        this.$refs[formName].validate((valid, errors) => {
           if (valid) {
             alert('submit!');
           } else {
             console.log('error submit!!');
+            console.log(errors);
             return false;
           }
         });
