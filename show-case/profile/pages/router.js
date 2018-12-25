@@ -1,3 +1,5 @@
+import profile from './index.vue';
+
 import h5 from './h5';
 import h5Svg from './h5/svg.vue';
 
@@ -34,107 +36,113 @@ class Helper {
   constructor() {
     this.richRouterConfig = [{
       path: '/',
-      redirect: '/element',
+      redirect: '/profile',
     }, {
-      path: '/h5',
-      name: 'h5',
-      component: h5,
-      redirect: '/h5/svg',
+      path: '/profile',
+      name: 'profile',
+      component: profile,
+      routePath: '/profile',
       children: [{
-        path: 'svg',
-        name: 'svg',
-        component: h5Svg,
-      }]
-    }, {
-      path: '/vue',
-      name: 'vue',
-      component: vueIndex,
-      children: [{
-        path: 'transition',
-        name: 'transition',
-        component: transition
+        path: 'h5',
+        name: 'h5',
+        component: h5,
+        redirect: 'h5/svg',
+        children: [{
+          path: 'svg',
+          name: 'svg',
+          component: h5Svg,
+        }]
       }, {
-        path: 'event',
-        name: 'event',
-        component: event
-      }]
-    }, {
-      path: '/element',
-      name: 'element',
-      redirect: '/element/menu',
-      component: element,
-      children: [{
-        path: 'form',
-        name: 'form',
-        component: elForm
+        path: 'vue',
+        name: 'vue',
+        component: vueIndex,
+        children: [{
+          path: 'transition',
+          name: 'transition',
+          component: transition
+        }, {
+          path: 'event',
+          name: 'event',
+          component: event
+        }]
       }, {
-        path: 'menu',
-        name: 'menu',
-        component: menu
+        path: 'element',
+        name: 'element',
+        redirect: 'element/menu',
+        component: element,
+        children: [{
+          path: 'form',
+          name: 'form',
+          component: elForm
+        }, {
+          path: 'menu',
+          name: 'menu',
+          component: menu
+        }, {
+          path: 'notify',
+          name: 'notify',
+          component: notify
+        }, {
+          path: 'tree',
+          name: 'tree',
+          component: tree
+        }, {
+          path: 'slider',
+          name: 'slider',
+          component: slider
+        }, {
+          path: 'input',
+          name: 'input',
+          component: input
+        }, {
+          path: 'steps',
+          name: 'steps',
+          component: elSteps
+        }]
       }, {
-        path: 'notify',
-        name: 'notify',
-        component: notify
+        path: 'custom',
+        name: 'custom',
+        component: custom,
+        children: [{
+          path: 'others',
+          name: 'others',
+          component: others
+        }, {
+          path: 'tree-navigation',
+          name: 'tree-navigation',
+          component: CustomTreeNavigation
+        }, {
+          path: 'clipboard',
+          name: 'clipboard',
+          component: ClipBoard
+        }, {
+          path: 'svg-icon',
+          name: 'svg-icon',
+          component: customSvgIcon
+        }]
       }, {
-        path: 'tree',
-        name: 'tree',
-        component: tree
+        path: 'echarts',
+        name: 'echarts',
+        component: echarts
       }, {
-        path: 'slider',
-        name: 'slider',
-        component: slider
+        path: 'v-charts',
+        name: 'v-charts',
+        redirect: 'v-charts/line',
+        component: vCharts,
+        children: [{
+          path: 'line',
+          name: 'line',
+          component: vChartsLine,
+        }]
       }, {
-        path: 'input',
-        name: 'input',
-        component: input
-      }, {
-        path: 'steps',
-        name: 'steps',
-        component: elSteps
-      }]
-    }, {
-      path: '/custom',
-      name: 'custom',
-      component: custom,
-      children: [{
-        path: 'others',
-        name: 'others',
-        component: others
-      }, {
-        path: 'tree-navigation',
-        name: 'tree-navigation',
-        component: CustomTreeNavigation
-      }, {
-        path: 'clipboard',
-        name: 'clipboard',
-        component: ClipBoard
-      }, {
-        path: 'svg-icon',
-        name: 'svg-icon',
-        component: customSvgIcon
-      }]
-    }, {
-      path: '/echarts',
-      name: 'echarts',
-      component: echarts
-    }, {
-      path: '/v-charts',
-      name: 'v-charts',
-      redirect: '/v-charts/line',
-      component: vCharts,
-      children: [{
-        path: 'line',
-        name: 'line',
-        component: vChartsLine,
-      }]
-    }, {
-      path: '/code-mirror',
-      name: 'code-mirror',
-      component: codeMirror,
-      children: [{
-        path: 'example',
-        name: 'example',
-        component: codeMirrorExample
+        path: 'code-mirror',
+        name: 'code-mirror',
+        component: codeMirror,
+        children: [{
+          path: 'example',
+          name: 'example',
+          component: codeMirrorExample
+        }]
       }]
     }];
 
@@ -271,6 +279,7 @@ class Helper {
   }
 
   getConfig4NavMenu() {
+    // 截取部分属性，没有name属性会被过滤掉
     function updateItem(item) {
       let keysMap = {
         routePath: 'routePath',
@@ -309,8 +318,9 @@ class Helper {
       }
     }
 
-    let menuConfig = traverseComponent(this.richRouterConfig);
-    return menuConfig;
+    var menuConfig = traverseComponent(this.richRouterConfig);
+    // return children of route profile
+    return menuConfig[0]['children'];
   }
 }
 

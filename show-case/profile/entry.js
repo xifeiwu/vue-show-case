@@ -17,7 +17,7 @@ import 'assets/css/common.scss';
 import 'assets/css/fonts/paas-icon.css';
 import 'assets/css/fonts/paas-icon.js';
 
-import indexPage from './pages/index.vue';
+import entryPage from './pages/entry.vue';
 import router from './pages/router';
 
 import 'element-ui/packages/theme-chalk/src/index.scss';
@@ -34,7 +34,7 @@ Promise.all([
   components[0].default.install(Vue);
   components[1].default.install(Vue);
   window.vm = new Vue({ // eslint-disable-line
-    render: h => h(indexPage),
+    render: h => h(entryPage),
     store: store,
     router: router,
   }).$mount('#app');

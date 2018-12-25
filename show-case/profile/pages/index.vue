@@ -1,5 +1,5 @@
 <template>
-  <div id="profile" class="spa">
+  <div id="profile">
     <nav-menu :activeSideMenuItem="activeSideMenuItem"></nav-menu>
     <div class="main">
       <router-view></router-view>
