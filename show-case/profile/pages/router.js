@@ -4,8 +4,9 @@ import h5 from './h5';
 import h5Svg from './h5/svg.vue';
 
 import vueIndex from './vue';
-import transition from './vue/transition/transition.vue';
-import event from './vue/event.vue';
+import vueTransition from './vue/transition/transition.vue';
+import vueDirective from './vue/directive/index.vue';
+import vueEvent from './vue/event.vue';
 
 import element from './element';
 import notify from './element/notify.vue';
@@ -21,6 +22,7 @@ import CustomTreeNavigation from './custom/tree-navigation.vue';
 import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
 import customSvgIcon from './custom/svg-icon.vue';
+import customScrollSpy from './custom/scrollspy.vue';
 
 import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
@@ -59,11 +61,15 @@ class Helper {
         children: [{
           path: 'transition',
           name: 'transition',
-          component: transition
+          component: vueTransition
+        }, {
+          path: 'directive',
+          name: 'directive',
+          component: vueDirective
         }, {
           path: 'event',
           name: 'event',
-          component: event
+          component: vueEvent
         }]
       }, {
         path: 'element',
@@ -119,6 +125,10 @@ class Helper {
           path: 'svg-icon',
           name: 'svg-icon',
           component: customSvgIcon
+        }, {
+          path: 'scroll-spy',
+          name: 'scroll-spy',
+          component: customScrollSpy
         }]
       }, {
         path: 'echarts',
