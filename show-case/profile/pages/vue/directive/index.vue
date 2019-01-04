@@ -1,7 +1,9 @@
 <template>
   <div  id="vue-directive">
-    <div v-show-props.message="message" v-if="false"></div>
-    <div v-show-props.count="count"></div>
+    <div v-show-props.message="message" v-if="false">
+    </div>
+    <div v-show-props.count="count" :title="msg">
+    </div>
   </div>
 </template>
 
@@ -14,9 +16,10 @@
   export default {
     directives: {showProps},
     mounted() {
+      // show the use of vnode.context and directive.update
       this.interval = setInterval(() => {
         this.count += 1;
-      }, 1000);
+      }, 3000);
     },
     beforeDestroy() {
 //      console.log(this.interval);

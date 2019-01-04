@@ -10,18 +10,24 @@ const updateContent = (el, binding, vnode) =>{
     'vnode keys: ' + Object.keys(vnode).join(', ')
 };
 
+const showStatus = (status) => {
+  console.log(status);
+};
+
 export default {
   inserted(el, binding, vnode) {
-    console.log('inserted');
+    showStatus('inserted');
   },
   bind(el, binding, vnode) {
-    console.log('bind');
+    showStatus('bind');
+    vnode.context.msg = 'context.data';
   },
   update(el, binding, vnode) {
-    console.log('update');
+    showStatus('update');
     updateContent(el, binding, vnode);
+    console.log(vnode);
   },
   unbind(el, binding, vnode) {
-    console.log('unbind');
+    showStatus('unbind');
   },
 }
