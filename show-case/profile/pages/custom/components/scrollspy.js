@@ -1,7 +1,6 @@
 // import { scrollWithAnimation, Easing } from './animate.js'
 
 
-var options = null;
 const bodyScrollEl = {}
 
 // For ff, ie
@@ -29,7 +28,7 @@ Object.defineProperty(bodyScrollEl, 'offsetHeight', {
 
 const scrollSpyContext = '@@scrollSpyContext'
 // 通过scroll得到锚点的宿主结点
-const scrollSpyContainer = {}
+const containerMap = {}
 // 共有多少sections. key: scroll-syp-id
 const scrollSpySections = {}
 // 通过scrollId得到当前活跃的Element
@@ -39,7 +38,7 @@ const activableElements = {}
 // 通过scrollId得到当前活跃的index
 const currentIndex = {}
 
-options = Object.assign({
+const DEFAULT_OPTIONS = Object.assign({
   allowNoActive: false,
   sectionSelector: null,
   data: null,
@@ -54,7 +53,7 @@ options = Object.assign({
   link: {
     selector: 'a'
   }
-}, options || {})
+}, {})
 
 function findElements (container, selector) {
   if (!selector) {
@@ -140,9 +139,9 @@ function scrollTo (el, index) {
   }
 }
 
-const scrollSpy = {
+const scrollSpyContainer = {
   bind: function (el, binding, vnode) {
-    console.log(el, binding, vnode)
+    // console.log(el, binding, vnode)
     function onScroll () {
       const id = scrollSpyId(el)
       const idScrollSections = scrollSpySections[id]
@@ -184,7 +183,7 @@ const scrollSpy = {
       if (index !== currentIndex[id]) {
         let idActiveElement = activeElement[id]
         if (idActiveElement) {
-          console.log(idActiveElement)
+          // console.log(idActiveElement)
           idActiveElement.classList.remove(idActiveElement[scrollSpyContext].options.class)
           activeElement[id] = null
         }
@@ -194,15 +193,16 @@ const scrollSpy = {
           idActiveElement = activableElements[id][currentIndex[id]]
           activeElement[id] = idActiveElement
 
-          console.log(activableElements);
+          // console.log(activableElements);
 
           if (idActiveElement) {
-            console.log(idActiveElement[scrollSpyContext])
+            // console.log(idActiveElement[scrollSpyContext])
             idActiveElement.classList.add(idActiveElement[scrollSpyContext].options.class)
           }
         }
 
         if (options.data) {
+          vnode.context[options.data] = index;
           // Vue.set(vnode.context, options.data, index)
         }
       }
@@ -216,7 +216,7 @@ const scrollSpy = {
     // console.log(binding.value)
     el[scrollSpyContext] = {
       onScroll,
-      options: Object.assign({}, options, binding.value),
+      options: Object.assign({}, DEFAULT_OPTIONS, binding.value),
       id: scrollSpyId(el),
       eventEl: el,
       scrollEl: el
@@ -224,7 +224,7 @@ const scrollSpy = {
     // console.log(el[scrollSpyContext])
     // console.log(el);
 
-    scrollSpyContainer[id] = el
+    containerMap[id] = el
     delete currentIndex[id]
   },
   inserted: function (el) {
@@ -238,7 +238,7 @@ const scrollSpy = {
     onScroll()
   },
   componentUpdated: function (el, binding) {
-    el[scrollSpyContext].options = Object.assign({}, options, binding.value)
+    el[scrollSpyContext].options = Object.assign({}, DEFAULT_OPTIONS, binding.value)
     const {
       onScroll, options: { sectionSelector }
     } = el[scrollSpyContext]
@@ -252,81 +252,73 @@ const scrollSpy = {
   }
 }
 
-function scrollSpyActiveListener (el, binding) {
-  const activeOptions = Object.assign({}, options.active, binding.value)
-  const id = scrollSpyId(el)
-  // console.log(id);
-  // console.log(activeOptions);
-  activableElements[id] = findElements(el, activeOptions.selector)
-  // const arr = [...activableElements[id]]
-  var arr = [].slice.call(activableElements[id])
-  arr.map(el => {
-    console.log(el);
-    el[scrollSpyContext] = {
-      options: activeOptions
+class ScrollSpyLinkHelper {
+  constructor() {
+    this.clickListener = null;
+  }
+  update(el, binding) {
+    // this.el = el;
+    // this.binding = binding;
+    const id = scrollSpyId(el)
+    const options = Object.assign({}, DEFAULT_OPTIONS.link, binding.value)
+    const linkElements = [].slice.call(findElements(el, options.selector));
+    linkElements.forEach((it, index) => {
+      it[scrollSpyContext] = {
+        options: options
+      }
+    });
+    activableElements[id] = linkElements;
+
+    this.id = id;
+    this.options = options;
+    this.linkElements = linkElements;
+
+  }
+  removeClickListener(el) {
+    if (this.clickListener) {
+      el.addEventListener('click', this.clickListener);
     }
-  })
-}
-
-const scrollSpyActive = {
-  inserted: scrollSpyActiveListener,
-  componentUpdated: scrollSpyActiveListener
-}
-
-function scrollLinkClickHandler (index, scrollSpyId, event) {
-  scrollTo(scrollSpyContainer[scrollSpyId], index)
-}
-
-function initScrollLink (el, selector) {
-  const id = scrollSpyId(el)
-
-  const linkElements = findElements(el, selector)
-
-  for (let i = 0; i < linkElements.length; i++) {
-    const linkElement = linkElements[i]
-
-    const listener = scrollLinkClickHandler.bind(null, i, id)
-    if (!linkElement[scrollSpyContext]) {
-      linkElement[scrollSpyContext] = {}
+  }
+  // only one listener for click
+  addClickListener(el, binding) {
+    if (this.clickListener) {
+      el.addEventListener('click', this.clickListener);
     }
-
-    if (!linkElement[scrollSpyContext].click) {
-      linkElement.addEventListener('click', listener)
-      linkElement[scrollSpyContext].click = listener
-    }
+    this.clickListener = (evt) => {
+      const id = this.id;
+      const linkElements = this.linkElements;
+      var target = evt.target;
+      while(target && linkElements.indexOf(target) === -1) {
+        target = target.parentElement
+      }
+      var index = linkElements.indexOf(target);
+      if (index > -1) {
+        scrollTo(containerMap[id], index)
+      }
+    };
+    el.addEventListener('click', this.clickListener);
   }
 }
 
+const scrollSpyLinkHelper = new ScrollSpyLinkHelper();
 const scrollSpyLink = {
-  inserted: function (el, binding) {
-    const linkOptions = Object.assign({}, options.link, binding.value)
-    initScrollLink(el, linkOptions.selector)
+  bind(el, binding) {
+    scrollSpyLinkHelper.update(el, binding);
+    scrollSpyLinkHelper.addClickListener(el, binding);
   },
-  componentUpdated: function (el, binding) {
-    const linkOptions = Object.assign({}, options.link, binding.value)
-    initScrollLink(el, linkOptions.selector)
+  inserted(el, binding) {
   },
-  unbind (el) {
-    const linkElements = findElements(el)
-
-    for (let i = 0; i < linkElements.length; i++) {
-      const linkElement = linkElements[i]
-      const id = scrollSpyId(el)
-      const listener = scrollLinkClickHandler.bind(null, i, id)
-      if (!linkElement[scrollSpyContext]) {
-        linkElement[scrollSpyContext] = {}
-      }
-
-      if (linkElement[scrollSpyContext].click) {
-        linkElement.removeEventListener('click', listener)
-        delete linkElement[scrollSpyContext]['click']
-      }
-    }
+  update(el, binding) {
+    // console.log('update')
+    // console.log(binding);
+    scrollSpyLinkHelper.update(el, binding);
+  },
+  unbind(el) {
+    scrollSpyLinkHelper.removeClickListener(el);
   }
 }
 
 export {
-  scrollSpy,
-  scrollSpyActive,
+  scrollSpyContainer,
   scrollSpyLink
 }

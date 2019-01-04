@@ -1,7 +1,7 @@
 <template>
   <div id="custom-scroll-spy" class="container">
     <div class="sidebar">
-      <ul class="menu" v-scroll-spy-active="{class: 'customActive'}" v-scroll-spy-link>
+      <ul class="menu" v-scroll-spy-link="{class: 'customActive'}" scroll-spy-id="demo">
         <li :key="item" v-for="item in titles" class="menu-item">
           <a>{{item}}</a>
         </li>
@@ -9,7 +9,7 @@
       <div class="current-section">Section: {{section}}</div>
     </div>
 
-    <div class="main" v-scroll-spy="{data: 'section'}">
+    <div class="main" v-scroll-spy-container="{data: 'section'}" scroll-spy-id="demo">
       <div>
         <h1>Ludwig van Beethoven </h1>
         <p>
@@ -86,12 +86,11 @@
 </style>
 <script>
   import {
-    scrollSpy,
-    scrollSpyActive,
+    scrollSpyContainer,
     scrollSpyLink
   } from './components/scrollspy';
   export default {
-    directives: { scrollSpy, scrollSpyActive, scrollSpyLink },
+    directives: { scrollSpyContainer, scrollSpyLink },
     created() {
     },
     data () {
