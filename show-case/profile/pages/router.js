@@ -9,13 +9,14 @@ import vueDirective from './vue/directive/index.vue';
 import vueEvent from './vue/event.vue';
 
 import element from './element';
-import notify from './element/notify.vue';
+import elNotify from './element/notify.vue';
 import elForm from './element/form.vue';
-import tree from './element/tree.vue';
-import slider from './element/slider.vue';
-import menu from './element/menu.vue';
-import input from './element/input.vue';
+import elTree from './element/tree.vue';
+import elSlider from './element/slider.vue';
+import elMenu from './element/menu.vue';
+import elInput from './element/input.vue';
 import elSteps from './element/steps.vue'
+import elTab from './element/tab.vue'
 
 import custom from './custom';
 import CustomTreeNavigation from './custom/tree-navigation.vue';
@@ -83,27 +84,31 @@ class Helper {
         }, {
           path: 'menu',
           name: 'menu',
-          component: menu
+          component: elMenu
         }, {
           path: 'notify',
           name: 'notify',
-          component: notify
+          component: elNotify
         }, {
           path: 'tree',
           name: 'tree',
-          component: tree
+          component: elTree
         }, {
           path: 'slider',
           name: 'slider',
-          component: slider
+          component: elSlider
         }, {
           path: 'input',
           name: 'input',
-          component: input
+          component: elInput
         }, {
           path: 'steps',
           name: 'steps',
           component: elSteps
+        }, {
+          path: 'tab',
+          name: 'tab',
+          component: elTab
         }]
       }, {
         path: 'custom',
