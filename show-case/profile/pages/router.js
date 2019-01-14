@@ -7,6 +7,7 @@ import vueIndex from './vue';
 import vueTransition from './vue/transition/transition.vue';
 import vueDirective from './vue/directive/index.vue';
 import vueEvent from './vue/event.vue';
+import vueSlot from './vue/slot/index.vue';
 
 import element from './element';
 import elNotify from './element/notify.vue';
@@ -71,6 +72,10 @@ class Helper {
           path: 'event',
           name: 'event',
           component: vueEvent
+        }, {
+          path: 'slot',
+          name: 'slot',
+          component: vueSlot
         }]
       }, {
         path: 'element',
