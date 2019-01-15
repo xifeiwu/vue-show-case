@@ -1,6 +1,11 @@
 <template>
   <div id="h5-svg">
-    <basic></basic>
+    <div>
+      <basic></basic>
+    </div>
+    <div>
+      <pie></pie>
+    </div>
   </div>
 </template>
 
@@ -12,8 +17,9 @@
 </style>
 <script>
   import basic from './basic.vue';
+  import pie from './pie.vue';
   export default {
-    components: {basic},
+    components: {basic, pie},
     data: function () {
       return {}
     }
