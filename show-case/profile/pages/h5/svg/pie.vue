@@ -1,15 +1,25 @@
 <template>
-  <svg class="pie">
+  <svg class="pie" viewBox="0, 0, 300, 300">
     <circle
             v-for="item in dataObjects"
-            v-bind:style="{strokeDasharray: `${item.relativeSize} ${circleLength}`, strokeDashoffset: item.offset}"
-            r="25%"
+            :style="{strokeDasharray: `${item.relativeSize} ${perimeter}`, strokeDashoffset: item.offset}"
+            :r="radius"
             cx="50%"
             cy="50%"
     />
   </svg>
 </template>
 
+<style lang="scss" scoped>
+  .pie {
+    width: 300px;
+    height: 300px;
+    circle {
+      width: 100%;
+      height: 100%;
+    }
+  }
+</style>
 <script>
   export default {
     name: 'PieChart',
@@ -19,8 +29,8 @@
     },
     data() {
       return {
-        data: [10,20,40,50],
-        circleLength: 371.9451599121094,
+        radius: 80,
+        data: [10, 20, 40, 50],
         hasMounted: false
       }
     },
@@ -43,21 +53,26 @@
       }
     },
     computed: {
+      perimeter() {
+        return 2 * Math.PI * this.radius;
+      },
       dataTotal() {
         return this.data.reduce((previous, current) => previous + current);
       },
       dataObjects() {
         let startingPoint = 0;
 
-        return this.data.map(item => {
-          let relativeSize = ((item / this.dataTotal) * this.circleLength);
+        var result = this.data.map(item => {
+          let relativeSize = ((item / this.dataTotal) * this.perimeter);
 
           let dataObject =  { relativeSize: this.hasMounted? relativeSize: 0 , offset: -startingPoint };
 
           startingPoint += relativeSize;
 
           return dataObject;
-        })
+        });
+        console.log(result);
+        return result;
       }
     }
   }
@@ -66,7 +81,7 @@
 <style lang="scss">
   .pie circle {
     fill: none;
-    stroke-width: 32;
+    stroke-width: 60;
     transition: stroke-dasharray 0.3s ease-in-out,stroke-dashoffset 0.3s ease-in-out;
   }
 
