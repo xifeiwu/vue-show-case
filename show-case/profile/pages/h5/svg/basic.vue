@@ -1,5 +1,5 @@
 <template>
-  <div id="h5-svg">
+  <div id="h5-svg-basic">
     <div class="item rolling">
       <svg>
         <circle cx="100" cy="100" r="100" width="100" height="100" stroke-width="2" fill="none"
