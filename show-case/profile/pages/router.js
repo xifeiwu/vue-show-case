@@ -1,7 +1,7 @@
 import profile from './index.vue';
 
 import h5 from './h5';
-import h5Svg from './h5/svg.vue';
+import h5SvgBasic from './h5/svg/basic.vue';
 
 import vueIndex from './vue';
 import vueTransition from './vue/transition/transition.vue';
@@ -54,7 +54,7 @@ class Helper {
         children: [{
           path: 'svg',
           name: 'svg',
-          component: h5Svg,
+          component: h5SvgBasic,
         }]
       }, {
         path: 'vue',
