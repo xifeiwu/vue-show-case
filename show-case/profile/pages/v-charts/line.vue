@@ -1,13 +1,13 @@
 <template>
   <div id="v-charts_line">
     <div class="chart-container">
-      <ve-line height="300px" :data="chartData" :data-zoom="dataZoom"></ve-line>
+      <ve-line height="300px" :data="chartData" :height="chartHeight" :grid="grid" :data-zoom="dataZoom" ></ve-line>
     </div>
     <div class="chart-container">
-      <ve-line height="300px" :data="chartData2" :settings="chartSettings2" :events="chartEvents"></ve-line>
+      <ve-line height="300px" :data="chartData2" :height="chartHeight" :grid="grid" :settings="chartSettings2" :events="chartEvents"></ve-line>
     </div>
     <div class="chart-container">
-      <ve-line height="300px" :data="chartData3" :settings="chartSettings3"></ve-line>
+      <ve-line height="300px" :data="chartData3" :height="chartHeight" :grid="grid" :settings="chartSettings3"></ve-line>
     </div>
   </div>
 </template>
@@ -38,13 +38,45 @@
     components: { VeLine },
     data() {
       return {
+
+        chartHeight: '230px',
+        grid: {
+          top: 30,
+          left: 5,
+          bottom: 20,
+          height: 180,
+        },
         dataZoom: [
           {
             type: 'slider',
             start: 0,
-            end: 20
+            end: 100,
+            bottom: 3,
+            height: 15,
+            handleIcon: 'M10.7,11.9H9.3c-4.9,0.3-8.8,4.4-8.8,9.4c0,5,3.9,9.1,8.8,9.4h1.3c4.9-0.3,8.8-4.4,8.8-9.4C19.5,16.3,15.6,12.2,10.7,11.9z M13.3,24.4H6.7V23h6.6V24.4z M13.3,19.6H6.7v-1.4h6.6V19.6z',
           }
         ],
+        // not used
+        chartSettingTime: {
+          dimension: ['timestamp'],
+          yAxisName: ['用时'],
+          yAxisType: ['value'],
+        },
+
+        extend: {
+          'xAxis.0.axisLabel.rotate': 0,
+          'tooltip.textStyle.fontSize': 12,
+          'tooltip.textStyle.lineHeight': 14,
+          'tooltip.position': [3, 3],
+        },
+
+//        dataZoom: [
+//          {
+//            type: 'slider',
+//            start: 0,
+//            end: 20
+//          }
+//        ],
         chartData: {
           columns: ['日期', '访问用户', '下单用户', '下单率'],
           rows: [
