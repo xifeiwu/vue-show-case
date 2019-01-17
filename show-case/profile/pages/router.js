@@ -8,6 +8,7 @@ import vueTransition from './vue/transition/transition.vue';
 import vueDirective from './vue/directive/index.vue';
 import vueEvent from './vue/event.vue';
 import vueSlot from './vue/slot/index.vue';
+import vueVNode from './vue/vnode/index.vue';
 
 import element from './element';
 import elNotify from './element/notify.vue';
@@ -25,6 +26,7 @@ import ClipBoard from './custom/clipboard.vue';
 import others from './custom/others.vue';
 import customSvgIcon from './custom/svg-icon.vue';
 import customScrollSpy from './custom/scrollspy.vue';
+import customSimpleTable from './custom/simple-table.vue';
 
 import echarts from './echarts.vue';
 import vCharts from './v-charts/index.vue';
@@ -76,6 +78,10 @@ class Helper {
           path: 'slot',
           name: 'slot',
           component: vueSlot
+        }, {
+          path: 'vnode',
+          name: 'vnode',
+          component: vueVNode
         }]
       }, {
         path: 'element',
@@ -139,6 +145,10 @@ class Helper {
           path: 'scroll-spy',
           name: 'scroll-spy',
           component: customScrollSpy
+        }, {
+          path: 'simple-table',
+          name: 'simple-table',
+          component: customSimpleTable
         }]
       }, {
         path: 'echarts',
