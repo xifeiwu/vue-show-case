@@ -79,6 +79,7 @@
     .el-menu {
       margin-top: 15px;
       width: 100%;
+      border-right-width: 0px;
       .icon-section {
         display: inline-block;
         justify-content: space-around;
