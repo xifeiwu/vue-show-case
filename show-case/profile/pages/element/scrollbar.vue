@@ -1,29 +1,82 @@
 <template>
   <div id="vue-scrollbar">
+    <table>
+      <caption>滚动相关总结</caption>
+      <thead>
+        <tr>
+          <th>属性</th>
+          <th>总结</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>overflow: auto, scroll</td>
+          <td>scroll或auto，会影响浏览器自带的滚动条效果。scroll(会一直展示滚动条背景)，auto(hover的时候才展示滚动条及背景)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <label>
+      <span style="color: green; font-size: 14px;">添加内容</span>
+      <input type="checkbox" @click="handleClick($event, 'more-data')" :checked="moreData">
+      <input type="checkbox" v-model="moreData">
+    </label>
     <div class="container">
-      <el-scrollbar :native="false" class="show-default-scrollbar">
+      <el-scrollbar :native="false" class="section not-show-default-scrollbar">
         <p v-for="(row, index) in rows">{{row}}</p>
       </el-scrollbar>
+      <div class="section show-default-scrollbar">
+        <div class="wrap">
+          <p v-for="(row, index) in rows">{{row}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
   #vue-scrollbar {
+    table {
+      margin-bottom: 10px;
+      td, th {
+        padding: 3px 6px;
+      }
+    }
     .container {
-      .el-scrollbar {
-        width: 600px;
+      .section {
+        display: inline-block;
+        margin-left: 5px;
+        width: 500px;
         height: 600px;
+        &.el-scrollbar {
+          &.show-default-scrollbar {
+            .el-scrollbar__wrap {
+              color: #545454;
+              &::-webkit-scrollbar {
+                width: 3px;
+                background-color: #F5F5F5;
+              }
+              &::-webkit-scrollbar-thumb {
+                background-color: #909399;
+              }
+            }
+          }
+        }
         &.show-default-scrollbar {
-          .el-scrollbar__wrap {
-            color: #545454;
-            &::-webkit-scrollbar {
-              width: 3px;
-              background-color: #F5F5F5;
-            }
-            &::-webkit-scrollbar-thumb {
-              background-color: #909399;
-            }
+          .wrap {
+          }
+          overflow: auto;
+          color: #545454;
+          &::-webkit-scrollbar {
+            width: 3px;
+            background-color: #F5F5F5;
+          }
+          &:hover::-webkit-scrollbar {
+            width: 3px;
+            background-color: #F5F5F5;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: #909399;
           }
         }
       }
@@ -37,7 +90,8 @@
     },
     data() {
       return {
-        content: `介绍
+        moreData: true,
+        part1: `介绍
 类型检查
 静态类型语言在编译时执行类型检查，而动态类型的语言在运行时执行类型检查。类型检查确保并强制你声明的变量的类型（常量，布尔值，数字，变量，数组，对象）与您指定的值相匹配。
 当类型错误发生时，静态类型检查和动态类型检查之间的差异最为重要。在静态类型语言中，错误发生在编译步骤中，即在编译时会出现类型错误。在动态类型语言中，只有执行程序后才会出现错误。错误发生在运行时。
@@ -51,6 +105,8 @@
 将数据和行为分离
 帮助我们消除了一整类bug
 减少单元测试的数量
+`,
+        part2: `
 使用场景
 这段程序对你的业务非常关键
 随着需求的变化，这段程序很可能会被重构
@@ -66,7 +122,23 @@ TypeScript 同样支持最新的 ECMAScript 标准，并能将代码根据需求
     },
     computed: {
       rows() {
-        return this.content.split('\n');
+        var content = this.part1;
+        if (this.moreData) {
+          content += this.part2;
+        }
+//        var content = this.part1 + this.part2;
+        return content.split('\n');
+      }
+    },
+    methods: {
+      handleClick(evt, action) {
+        const target = evt.target;
+        switch (action) {
+          case 'more-data':
+            this.moreData = target.checked;
+            console.log(target.checked);
+            break;
+        }
       }
     }
   }

@@ -53,6 +53,8 @@
     flex-flow: 0;
     flex-shrink: 0;
     transition: width 0.3s ease-out;
+    height: 100%;
+    overflow: scroll;
     &.collapse {
       width: 56px;
     }
