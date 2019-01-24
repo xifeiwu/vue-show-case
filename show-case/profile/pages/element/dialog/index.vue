@@ -1,13 +1,50 @@
 <template>
   <div id="element-dialog">
-    <el-button type="primary" size="mini" @click="handleClick($event, 'show-logs')">查看日志</el-button>
+    <el-button type="primary" size="mini" @click="outerVisible = true">点击打开外层 Dialog</el-button>
+    <el-button type="primary" size="mini" @click="handleClick($event, 'show-dialog-for-log')">查看日志</el-button>
+    <el-button type="primary" size="mini" @click="handleClick($event, 'show-dialog-for-log-2')">查看日志2</el-button>
+    <div>
+      <label><el-checkbox v-model="scrollContainer">填充内容以便滚动</el-checkbox></label>
+    </div>
+    <div style="height: 200%" v-if="scrollContainer"></div>
+
+    <el-dialog title="外层 Dialog"
+               :fullscreen="false"
+               customClass="paas"
+               :visible.sync="outerVisible">
+      <el-dialog
+              width="30%"
+              title="内层 Dialog"
+              :visible.sync="innerVisible"
+              append-to-body>
+      </el-dialog>
+      <div slot="footer" class="dialog-footer">
+        <el-button size="mini" @click="outerVisible = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="innerVisible = true">打开内层 Dialog</el-button>
+      </div>
+    </el-dialog>
     <dialog-for-log title="部署日志" :showStatus="dialogForLogStatus" ref="dialogForDeployLog">
+      <div slot="content">
+        <div v-for="(item,index) in deployLogs" :key="index" class="log-item" v-html="item"></div>
+      </div>
+    </dialog-for-log>
+    <dialog-for-log title="部署日志-2" :showStatus="dialogForLogStatus2" ref="dialogForDeployLog2">
+      <template slot="icons">
+        <i class="el-icon-refresh"></i>
+      </template>
       <div slot="content">
         <div v-for="(item,index) in deployLogs" :key="index" class="log-item" v-html="item"></div>
       </div>
     </dialog-for-log>
   </div>
 </template>
+<style lang="scss">
+  #element-dialog {
+    height: 100%;
+    overflow: scroll;
+    padding-top: 10px;
+  }
+</style>
 <script>
   import dialogForLog from './dialog4log';
   export default {
@@ -16,11 +53,14 @@
     mounted() {},
     data() {
       return {
+        scrollContainer: false,
+        outerVisible: false,
+        innerVisible: false,
         dialogForLogStatus: {
           visible: false,
-          full: false,
-          showLoading: false,
-          iconExpand: true
+        },
+        dialogForLogStatus2: {
+          visible: false,
         },
       }
     },
@@ -72,6 +112,26 @@ Exploring the Ecosystem: For advanced features, we assume some ecosystem knowled
 8
 9
 10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
 `;
         const result = originLog.split('\n');
         return result
@@ -80,8 +140,11 @@ Exploring the Ecosystem: For advanced features, we assume some ecosystem knowled
     methods: {
       handleClick(evt, action) {
         switch (action) {
-          case 'show-logs':
+          case 'show-dialog-for-log':
             this.dialogForLogStatus.visible = true;
+            break;
+          case 'show-dialog-for-log-2':
+            this.dialogForLogStatus2.visible = true;
             break;
         }
       }

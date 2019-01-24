@@ -2,145 +2,98 @@
   <el-dialog :title="title" :visible="showStatus.visible"
              @close="handleIconClick('close')"
              class="dialog-for-log"
+             customClass="dialog-for-log"
+             :appendToBody="true"
+             :fullscreen="fullScreen"
              :closeOnClickModal="false"
              ref="dialog-for-log"
              top="80px"
   >
-    <el-scrollbar
-            v-loading="showStatus.showLoading"
-            element-loading-text="加载中"
-            element-loading-spinner="el-icon-loading"
-            element-loading-background="rgba(0, 0, 0, 0.1)"
-    >
-      <slot name="content"></slot>
-    </el-scrollbar>
     <div slot="title" class="dialog-title">
       <span class="title">{{title}}</span>
       <div class="icon-list">
-        <i :class="['paas-icon', 'el-icon-refresh', showStatus.showLoading ? 'loading' : '', !showStatus.iconRefresh ? 'hide': '']"
-           @click="handleIconClick('refresh')"></i>
-        <i :class="['paas-icon', showStatus.full ? 'paas-icon-screen-shrink':'paas-icon-screen-expand', !showStatus.iconExpand ? 'hide': '']"
+        <slot name="icons"></slot>
+        <i :class="['paas-icon', fullScreen ? 'paas-icon-screen-shrink':'paas-icon-screen-expand']"
            @click="handleIconClick('expand-or-shrink')"></i>
       </div>
     </div>
+    <el-scrollbar>
+      <slot name="content"></slot>
+    </el-scrollbar>
   </el-dialog>
 </template>
 <style lang="scss">
-  .spa .el-dialog__wrapper {
+  .el-dialog__wrapper.dialog-for-log {
     font-family: "微软雅黑", 'Microsoft Yahei','HelveticaNeue',sans-serif;
-    &.dialog-for-log {
-      @keyframes rotating {
-        0% {
-          transform: rotateZ(0deg);
+    .el-dialog.dialog-for-log {
+      background-color: rgba(0, 0, 0, 0.9);
+      width: 90%;
+      max-width: 1500px;
+      height: 80%;
+      text-align: left;
+      &.is-fullscreen {
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+        height: 100%;
+        overflow: auto;
+      }
+      .el-dialog__header {
+        height: 30px;
+        box-sizing: content-box;
+        padding: 0px;
+        margin: 0px;
+        border-bottom: 1px solid gray;
+        background-color: transparent;
+        .dialog-title {
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-right: 28px;
+          font-size: 14px;
+          .title {
+            color: white;
+            font-weight: bold;
+            margin-left: 10px;
+          }
+          .icon-list {
+            > i {
+              margin: 0px 2px;
+              display: inline-block;
+              color: #878d99;
+              line-height: 100%;
+              font-weight: normal;
+              cursor: pointer;
+              &:hover {
+                color: #46A0FC;
+              }
+            }
+          }
         }
-        100% {
-          transform: rotateZ(360deg);
+        .el-dialog__headerbtn {
+          top: 6px;
+          right: 6px;
         }
       }
-      .el-dialog {
-        background-color: rgba(0, 0, 0, 0.9);
-        width: 80%;
-        max-width: 1500px;
-        height: 70%;
-        text-align: left;
-        .el-dialog__header {
-          padding: 6px;
-          border-bottom: 1px solid gray;
-          background-color: transparent;
-          .dialog-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-right: 30px;
-            .title {
-              font-size: 14px;
-              font-weight: bold;
-              color: white;
-            }
-            .icon-list {
-              .paas-icon {
-                display: inline-block;
-                font-size: 14px;
-                line-height: 100%;
-                margin-top: 2px;
-                margin-right: 2px;
-                font-weight: normal;
-                color: #878d99;
-                cursor: pointer;
-                &.hide {
-                  display: none;
-                }
-                &:hover {
-                  color: #46A0FC;
-                }
-                &.el-icon-refresh {
-                  &.loading {
-                    pointer-events: none;
-                    animation: rotating 2s linear infinite;
-                  }
-                }
-              }
-            }
+      .el-dialog__body {
+        padding: 0px;
+        color: white;
+        height: calc(100% - 30px);
+        box-sizing: border-box;
+        overflow: scroll;
+        .el-scrollbar {
+          height: 100%;
+          font-size: 12px;
+          line-height: 16px;
+          &__thumb {
+            background-color: #409EFF;
+            /*background-color: white;*/
           }
-          .el-dialog__headerbtn {
-            top: 8px;
+          &__view {
+            color: lightgray;
+            padding: 5px;
           }
-        }
-        .el-dialog__body {
-          padding: 0px;
-          color: white;
-          height: calc(100% - 40px);
-          box-sizing: border-box;
-          overflow: scroll;
-          .el-scrollbar {
-            height: 100%;
-            .el-scrollbar__wrap {
-              .el-scrollbar__view {
-                padding: 0px 6px 10px 6px;
-              }
-            }
-            .el-scrollbar__bar {
-              &.is-horizontal {
-                height: 2px;
-              }
-              &.is-vertical {
-                width: 2px;
-              }
-              .el-scrollbar__thumb {
-                background-color: #409EFF;
-              }
-            }
-            .el-scrollbar__view {
-              .log-item {
-                word-wrap: break-word;
-                word-break: break-all;
-                font-size: 12px;
-                line-height: 16px;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    /*style for dialog log-run-log*/
-    &.log-run-log {
-      .log-item {
-        word-wrap: break-word;
-        word-break: break-all;
-        font-size: 12px;
-        line-height: 16px;
-        .time {
-          color: #FFFF00;
-        }
-        .thread {
-          color: #00FFCC;
-        }
-        .level {
-          color: #FF0000;
-        }
-        .content, .exception {
-          color: white;
         }
       }
     }
@@ -151,29 +104,8 @@
     created() {
     },
     mounted() {
-      /**
-       * Notice: prop visible, full must be passed, as it is watched in this component
-       */
-      if (!this.showStatus.hasOwnProperty('showLoading')) {
-        this.showStatus['showLoading'] = false;
-      }
-      if (!this.showStatus.hasOwnProperty('iconRefresh')) {
-        this.showStatus['iconRefresh'] = false;
-      }
-      if (!this.showStatus.hasOwnProperty('iconExpand')) {
-        this.showStatus['iconExpand'] = false;
-      }
-      let dialog = this.$refs['dialog-for-log'].$refs['dialog'];
-      if (this.showStatus.full && dialog) {
-        dialog.style.width = '100%';
-        dialog.style.height = '100%';
-        dialog.style.margin = '0px';
-      }
-      this.dialog = dialog;
-      // waiting until all dom is mounted
-      this.$nextTick(() => {
-        this.getScrollWrap();
-      });
+    },
+    beforeDestroy() {
     },
     props: {
       showStatus: {
@@ -181,10 +113,6 @@
         default() {
           return {
             visible: false,
-            full: false,
-            showLoading: false,
-            iconRefresh: false,
-            iconExpand: false
           };
         }
       },
@@ -192,82 +120,57 @@
         type: String,
         default: '日志'
       },
+      visible: {
+        type: Boolean,
+        default: false
+      }
     },
     watch: {
-      'showStatus.visible': function (value) {
-        if (value) {
-          this.$nextTick(() => {
-            this.scrollToTop();
-            this.getScrollWrap();
-            this.scrollListener = this.addListenerForScrollWrap();
-          });
+      'showStatus.visible': function (visible) {
+        if (visible) {
+          this.show();
         } else {
-          this.removeListenerForScrollWrap();
-        }
-      },
-      'showStatus.full': function(value) {
-        let dialog = this.$refs['dialog-for-log'].$refs['dialog'];
-        if (this.showStatus.full) {
-          dialog.style.width = '100%';
-          dialog.style.height = '100%';
-          dialog.style.margin = '0px';
-        } else {
-          dialog.style.width = '80%';
-          dialog.style.height = '70%';
-          dialog.style.margin = 'auto';
-          dialog.style.marginTop = '15vh';
+          this.hide();
         }
       }
     },
     data() {
       return {
+        top: '80px',
+        fullScreen: false,
         dialog: null,
         scrollWrap: null,
-        scrollListener: null,
-
-        // 是否滚动到了最底端
-        isScrolledBottom: true,
       }
     },
     methods: {
-      getScrollWrap() {
-        if (this.scrollWrap) {
+      show() {
+        this.$nextTick(() => {
+          const clientHeight = this.$el.clientHeight;
+          this.top = `${parseInt(clientHeight * 0.1)}px`;
+          // make sure dialog and scrollWrap is find
+          this.dialog = this.$refs['dialog-for-log'].$refs['dialog'];
+          this.scrollWrap = this.dialog.querySelector('.el-dialog__body .el-scrollbar .el-scrollbar__wrap');
+          if (!this.dialog || !this.scrollWrap) {
+            console.log('error: dialog or scrollWrap is not found!');
+            return;
+          }
+          this.scrollWrap.addEventListener('scroll', this.scrollListener);
+          this.scrollToTop();
+        });
+      },
+      hide() {
+        if (!this.scrollWrap) {
           return;
         }
-        this.scrollWrap = this.dialog.querySelector('.el-dialog__body .el-scrollbar .el-scrollbar__wrap');
-        return this.scrollWrap;
-      },
-      addListenerForScrollWrap() {
-        let scrollListener = null;
-        if (this.scrollWrap) {
-          scrollListener = (evt) => {
-            let target = evt.target;
-            this.isScrolledBottom = target.scrollTop + target.clientHeight === target.scrollHeight;
-            if (target) {
-              if (target.scrollTop === 0) {
-                this.$emit('scrollTop');
-              } else if (target.scrollTop + target.clientHeight === target.scrollHeight) {
-                this.$emit('scrollBottom');
-              }
-            }
-          };
-          this.scrollWrap.addEventListener('scroll', scrollListener);
-        }
-        return scrollListener;
-      },
-      removeListenerForScrollWrap() {
-        if (this.scrollWrap && this.scrollListener) {
-          this.scrollWrap.removeEventListener('scroll', this.scrollListener);
-        }
+        this.scrollWrap.removeEventListener('scroll', this.scrollListener);
+        // remove content when dialog is hidden
+        this.$slots.content = [];
       },
 
       handleIconClick(action) {
         switch (action) {
           case 'expand-or-shrink':
-            this.showStatus.full = !this.showStatus.full;
-            break;
-          case 'refresh':
-            this.$emit('refresh');
+            this.fullScreen = !this.fullScreen;
             break;
           case 'close':
             this.showStatus.visible = false;
@@ -276,16 +179,21 @@
         }
       },
 
-      scrollToTop() {
-        if (this.scrollWrap) {
-          this.scrollWrap.scrollTop = 0;
+      scrollListener(evt) {
+        let target = evt.target;
+        if (target) {
+          if (target.scrollTop === 0) {
+            this.$emit('scrollTop');
+          } else if (target.scrollTop + target.clientHeight === target.scrollHeight) {
+            this.$emit('scrollBottom');
+          }
         }
       },
+
+      scrollToTop() {
+        this.scrollWrap.scrollTop = 0;
+      },
       scrollToBottom() {
-        if (!this.scrollWrap) {
-          this.getScrollWrap();
-          return;
-        }
         this.scrollWrap.scrollTop = this.scrollWrap.scrollHeight - this.scrollWrap.clientHeight;
       }
     }
