@@ -4,6 +4,19 @@
       <label><input type="checkbox" v-model="checked">checkbox(原生)</label>
     </div>
     <div class="item">
+      <div><input type="checkbox" v-model="checked">checkbox(原生，div包裹和label包裹效果不同)</div>
+    </div>
+    <div class="item">
+      <div role="switch" class="el-switch">
+        <input type="checkbox" @change="handleInputChange($event)" :style="{position: 'absolute',
+            width: '0',
+            height: '0',
+            opacity: '0',
+            margin: '0'}">
+        <span>checkbox(原生，div包裹和label包裹效果不同)</span>
+      </div>
+    </div>
+    <div class="item">
       <label :class="{'custom-input': true, 'is-checked': isChecked}">
         <span class="inner">
           <span class="status"></span>
@@ -107,6 +120,9 @@
 
             break;
         }
+      },
+      handleInputChange(evt) {
+        console.log(evt);
       }
     }
   }

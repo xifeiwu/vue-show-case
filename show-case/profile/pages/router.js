@@ -12,6 +12,7 @@ import vueVNode from './vue/vnode/index.vue';
 
 import element from './element';
 import elCheckBox from './element/checkbox.vue';
+import elSwitch from './element/switch.vue';
 import elNotify from './element/notify.vue';
 import elForm from './element/form.vue';
 import elTree from './element/tree.vue';
@@ -99,6 +100,10 @@ class Helper {
           path: 'checkbox',
           name: 'checkbox',
           component: elCheckBox
+        }, {
+          path: 'switch',
+          name: 'switch',
+          component: elSwitch
         }, {
           path: 'form',
           name: 'form',
