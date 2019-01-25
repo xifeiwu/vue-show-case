@@ -14,6 +14,7 @@ import element from './element';
 import elCheckBox from './element/checkbox.vue';
 import elSwitch from './element/switch.vue';
 import elNotify from './element/notify.vue';
+import elPagination from './element/pagination.vue';
 import elForm from './element/form.vue';
 import elTree from './element/tree.vue';
 import elSlider from './element/slider.vue';
@@ -112,6 +113,10 @@ class Helper {
           path: 'menu',
           name: 'menu',
           component: elMenu
+        }, {
+          path: 'pagination',
+          name: 'pagination',
+          component: elPagination,
         }, {
           path: 'notify',
           name: 'notify',
