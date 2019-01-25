@@ -11,6 +11,7 @@ import vueSlot from './vue/slot/index.vue';
 import vueVNode from './vue/vnode/index.vue';
 
 import element from './element';
+import elCheckBox from './element/checkbox.vue';
 import elNotify from './element/notify.vue';
 import elForm from './element/form.vue';
 import elTree from './element/tree.vue';
@@ -91,6 +92,14 @@ class Helper {
         redirect: 'element/menu',
         component: element,
         children: [{
+          path: 'input',
+          name: 'input',
+          component: elInput
+        }, {
+          path: 'checkbox',
+          name: 'checkbox',
+          component: elCheckBox
+        }, {
           path: 'form',
           name: 'form',
           component: elForm
@@ -110,10 +119,6 @@ class Helper {
           path: 'slider',
           name: 'slider',
           component: elSlider
-        }, {
-          path: 'input',
-          name: 'input',
-          component: elInput
         }, {
           path: 'steps',
           name: 'steps',

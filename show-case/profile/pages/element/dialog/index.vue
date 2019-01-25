@@ -23,12 +23,12 @@
         <el-button size="mini" type="primary" @click="innerVisible = true">打开内层 Dialog</el-button>
       </div>
     </el-dialog>
-    <dialog-for-log title="部署日志" :showStatus="dialogForLogStatus" ref="dialogForDeployLog">
+    <dialog-for-log :showStatus="dialogForLogStatus" ref="dialogForDeployLog">
       <div slot="content">
         <div v-for="(item,index) in deployLogs" :key="index" class="log-item" v-html="item"></div>
       </div>
     </dialog-for-log>
-    <dialog-for-log title="部署日志-2" :showStatus="dialogForLogStatus2" ref="dialogForDeployLog2">
+    <dialog-for-log :showStatus="dialogForLogStatus2" ref="dialogForDeployLog2">
       <template slot="icons">
         <i class="el-icon-refresh"></i>
       </template>
@@ -57,9 +57,11 @@
         outerVisible: false,
         innerVisible: false,
         dialogForLogStatus: {
+          title: '部署日志',
           visible: false,
         },
         dialogForLogStatus2: {
+          title: '部署日志',
           visible: false,
         },
       }

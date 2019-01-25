@@ -10,7 +10,7 @@
              top="80px"
   >
     <div slot="title" class="dialog-title">
-      <span class="title">{{title}}</span>
+      <span class="title">{{showStatus.title}}</span>
       <div class="icon-list">
         <slot name="icons"></slot>
         <i :class="['paas-icon', fullScreen ? 'paas-icon-screen-shrink':'paas-icon-screen-expand']"
@@ -112,13 +112,10 @@
         type: Object,
         default() {
           return {
+            title: '日志',
             visible: false,
           };
         }
-      },
-      title: {
-        type: String,
-        default: '日志'
       },
       visible: {
         type: Boolean,
