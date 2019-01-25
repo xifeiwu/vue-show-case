@@ -24,6 +24,8 @@ import elSteps from './element/steps.vue';
 import elTab from './element/tab.vue';
 import elScrollBar from './element/scrollbar.vue';
 import elDialog from './element/dialog/index.vue';
+import elCarousel from './element/carousel.vue';
+
 
 import custom from './custom';
 import CustomTreeNavigation from './custom/tree-navigation.vue';
@@ -145,6 +147,10 @@ class Helper {
           path: 'dialog',
           name: 'dialog',
           component: elDialog
+        }, {
+          path: 'carousel',
+          name: 'carousel',
+          component: elCarousel
         }]
       }, {
         path: 'custom',

@@ -9,6 +9,8 @@ import BreadcrumbItem from 'element-ui/packages/breadcrumb-item/index.js';
 import Button from 'element-ui/packages/button/index.js';
 import ButtonGroup from 'element-ui/packages/button-group/index.js';
 import Card from 'element-ui/packages/card/index.js';
+import Carousel from 'element-ui/packages/carousel/index.js';
+import CarouselItem from 'element-ui/packages/carousel-item/index.js';
 import Checkbox from 'element-ui/packages/checkbox/index.js';
 import CheckboxButton from 'element-ui/packages/checkbox-button/index.js';
 import CheckboxGroup from 'element-ui/packages/checkbox-group/index.js';
@@ -71,6 +73,8 @@ const components = [
   Button,
   ButtonGroup,
   Card,
+  Carousel,
+  CarouselItem,
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
@@ -165,6 +169,8 @@ module.exports = {
   Button,
   ButtonGroup,
   Card,
+  Carousel,
+  CarouselItem,
   Checkbox,
   CheckboxButton,
   CheckboxGroup,
