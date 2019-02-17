@@ -4,6 +4,7 @@ import h5 from './h5';
 import h5Svg from './h5/svg/index.vue';
 
 import vueIndex from './vue';
+import vueBasic from './vue/basic/index.vue';
 import vueTransition from './vue/transition/transition.vue';
 import vueDirective from './vue/directive/index.vue';
 import vueEvent from './vue/event.vue';
@@ -70,6 +71,10 @@ class Helper {
         name: 'vue',
         component: vueIndex,
         children: [{
+          path: 'basic',
+          name: 'basic',
+          component: vueBasic
+        }, {
           path: 'transition',
           name: 'transition',
           component: vueTransition
