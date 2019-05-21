@@ -1,23 +1,25 @@
 <template>
-  <div id="vue-transition-effect">
+  <div id="vue-transition-group">
     <div v-for="item in effectList" style="min-height: 120px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
       <el-button @click="handleClick('toggle-show', item)" style="width: 240px;">toggle-{{item}}</el-button>
-      <transition :name="item">
-        <ul v-show="showStatus[item]" style="border: 1px solid gray; width: 300px; margin-left: 10px;">
-          <li>{{item}}</li>
-          <li>{{item}}</li>
-          <li>{{item}}</li>
-          <li>{{item}}</li>
-          <li>{{item}}</li>
-        </ul>
-      </transition>
-      <ul :class="['manual', item, showStatus[item] ? 'show':'']" style="border: 1px solid gray; width: 300px; margin-left: 10px;">
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-      </ul>
+      <div style="display: inline-block; width: 300px; height: 200px; overflow: hidden">
+        <transition-group :name="item">
+          <ul v-show="showStatus[item]" style="border: 1px solid gray; width: 200px; margin-left: 10px;" key="first">
+            <li>{{item}}</li>
+            <li>{{item}}</li>
+            <li>{{item}}</li>
+            <li>{{item}}</li>
+            <li>{{item}}</li>
+          </ul>
+          <ul v-show="!showStatus[item]" style="border: 1px solid gray; width: 200px; margin-left: 10px;" key="second">
+            <li>{{item}}-2</li>
+            <li>{{item}}-2</li>
+            <li>{{item}}-2</li>
+            <li>{{item}}-2</li>
+            <li>{{item}}-2</li>
+          </ul>
+        </transition-group>
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +80,23 @@
     transform: scale(.45, .45);
   }
 
+  .custom-zoom-in-left-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: $--md-fade-transition;
+    transform-origin: left;
+  }
+  .custom-zoom-in-left-enter {
+    transform: translateX(-100%);
+    /*opacity: 0;*/
+  }
+  .custom-zoom-in-left-leave {
+    opacity: 0;
+    /*display: none;*/
+  },
+  .custom-zoom-in-left-leave-active {
+  }
+
   .manual {
     &.el-zoom-in-left {
       transition: $--md-fade-transition;
@@ -120,9 +139,10 @@
           'el-zoom-in-top': true,
           'el-zoom-in-bottom': true,
           'el-zoom-in-left': true,
-          'el-zoom-in-center': true
+          'el-zoom-in-center': true,
+          'custom-zoom-in-left': true
         },
-        effectList: ['el-zoom-in-center', 'el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left']
+        effectList: ['el-zoom-in-center', 'el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left', 'custom-zoom-in-left']
       }
     },
     methods: {

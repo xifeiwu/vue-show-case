@@ -5,7 +5,7 @@ import h5Svg from './h5/svg/index.vue';
 
 import vueIndex from './vue';
 import vueBasic from './vue/basic/index.vue';
-import vueTransition from './vue/transition/transition.vue';
+import vueTransition from './vue/transition/index.vue';
 import vueDirective from './vue/directive/index.vue';
 import vueEvent from './vue/event.vue';
 import vueSlot from './vue/slot/index.vue';

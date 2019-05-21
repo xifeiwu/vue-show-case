@@ -1,23 +1,23 @@
 <template>
-  <div id="vue-transition-effect">
+  <div id="vue-transition-group">
     <div v-for="item in effectList" style="min-height: 120px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center">
       <el-button @click="handleClick('toggle-show', item)" style="width: 240px;">toggle-{{item}}</el-button>
-      <transition :name="item">
-        <ul v-show="showStatus[item]" style="border: 1px solid gray; width: 200px; margin-left: 10px;">
+      <transition-group :name="item">
+        <ul v-show="showStatus[item]" style="border: 1px solid gray; width: 200px; margin-left: 10px;" key="first">
           <li>{{item}}</li>
           <li>{{item}}</li>
           <li>{{item}}</li>
           <li>{{item}}</li>
           <li>{{item}}</li>
         </ul>
-      </transition>
-      <ul :class="['manual', item, showStatus[item] ? 'show':'']" style="border: 1px solid gray; width: 300px; margin-left: 10px;">
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-        <li>{{item}}</li>
-      </ul>
+        <ul v-show="!showStatus[item]" style="border: 1px solid gray; width: 200px; margin-left: 10px;" key="second">
+          <li>{{item}}</li>
+          <li>{{item}}</li>
+          <li>{{item}}</li>
+          <li>{{item}}</li>
+          <li>{{item}}</li>
+        </ul>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -86,7 +86,7 @@
     transform-origin: top left;
   }
   .custom-zoom-in-left-enter,
-  .custom-zoom-in-left-leave-active {
+  .custom-zoom-in-left-leave {
     opacity: 0;
     transform: scaleX(.45);
   }
