@@ -97,6 +97,23 @@
   .custom-zoom-in-left-leave-active {
   }
 
+  .global-zoom-in-right-1-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: $--md-fade-transition;
+    transform-origin: left;
+  }
+  .global-zoom-in-right-1-enter {
+    transform: translateX(120%);
+    /*opacity: 0;*/
+  }
+  .global-zoom-in-right-1-leave {
+    opacity: 0;
+    display: none;
+  }
+  .global-zoom-in-right-1-leave-active {
+  }
+
   .manual {
     &.el-zoom-in-left {
       transition: $--md-fade-transition;
@@ -140,9 +157,11 @@
           'el-zoom-in-bottom': true,
           'el-zoom-in-left': true,
           'el-zoom-in-center': true,
-          'custom-zoom-in-left': true
+          'custom-zoom-in-left': true,
+          'global-zoom-in-right-1': true,
         },
-        effectList: ['el-zoom-in-center', 'el-zoom-in-top', 'el-zoom-in-bottom', 'el-zoom-in-left', 'custom-zoom-in-left']
+        //'el-zoom-in-left', 'el-zoom-in-center', 'el-zoom-in-top', 'el-zoom-in-bottom', 
+        effectList: ['custom-zoom-in-left', 'global-zoom-in-right-1']
       }
     },
     methods: {
