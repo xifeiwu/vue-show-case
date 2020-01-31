@@ -1,9 +1,9 @@
-[submodule "components/element-ui"]
-	path = components/element-ui
-	url = git@gitlab.puhuitech.cn:paas-fe/element-ui.git
 [submodule "assets"]
 	path = assets
-	url = git@gitlab.puhuitech.cn:paas-fe/assets.git
+	url = git@elif.site:node/vue/assets.git
+[submodule "components/element-ui"]
+	path = components/element-ui
+	url = git@elif.site:node/vue/components/element-ui.git
 [submodule "components/custom"]
 	path = components/custom
-	url = git@gitlab.puhuitech.cn:paas-fe/components-custom.git
+	url = git@elif.site:node/vue/components/custom.git
