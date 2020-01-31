@@ -43,6 +43,7 @@
   "option-group": "element-ui/packages/option-group/index.js",
   "pagination": "element-ui/packages/pagination/index.js",
   "popover": "element-ui/packages/popover/index.js",
+  "popover-message": "element-ui/packages/popover-message/index.js",
   // "progress": "element-ui/packages/progress/index.js",
   "radio": "element-ui/packages/radio/index.js",
   "radio-group": "element-ui/packages/radio-group/index.js",

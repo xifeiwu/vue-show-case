@@ -39,6 +39,7 @@ import Option from 'element-ui/packages/option/index.js';
 import OptionGroup from 'element-ui/packages/option-group/index.js';
 import Pagination from 'element-ui/packages/pagination/index.js';
 import Popover from 'element-ui/packages/popover/index.js';
+import PopoverMessage from 'element-ui/packages/popover-message/index.js';
 import Radio from 'element-ui/packages/radio/index.js';
 import RadioGroup from 'element-ui/packages/radio-group/index.js';
 import RadioButton from 'element-ui/packages/radio-button/index.js';
@@ -99,6 +100,7 @@ const components = [
   OptionGroup,
   Pagination,
   Popover,
+  PopoverMessage,
   Radio,
   RadioGroup,
   RadioButton,
@@ -132,6 +134,7 @@ const install = function(Vue, opts = {}) {
   });
 
   Vue.use(Loading.directive);
+  Vue.directive('popover-onmouseover', PopoverMessage.directive);
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
@@ -198,6 +201,7 @@ module.exports = {
   OptionGroup,
   Pagination,
   Popover,
+  PopoverMessage,
   Radio,
   RadioGroup,
   RadioButton,

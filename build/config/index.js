@@ -3,7 +3,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path');
-const BASE_DIR = process.cwd();
 
 const VUE_PROJECT_NAME = 'show-case';
 const BASE_DIR = process.cwd();

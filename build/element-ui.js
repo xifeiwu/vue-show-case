@@ -66,6 +66,7 @@ const install = function(Vue, opts = {}) {
   });
 
   Vue.use(Loading.directive);
+  Vue.directive('popover-onmouseover', PopoverMessage.directive);
 
   Vue.prototype.$ELEMENT = {
     size: opts.size || '',
