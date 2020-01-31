@@ -12,21 +12,22 @@ import vueSlot from './vue/slot/index.vue';
 import vueVNode from './vue/vnode/index.vue';
 
 import element from './element';
-import elCheckBox from './element/checkbox.vue';
-import elSwitch from './element/switch.vue';
-import elNotify from './element/notify.vue';
-import elPagination from './element/pagination.vue';
-import elForm from './element/form.vue';
-import elTree from './element/tree.vue';
-import elSlider from './element/slider.vue';
-import elMenu from './element/menu.vue';
-import elInput from './element/input.vue';
-import elUpload from './element/upload.vue';
-import elSteps from './element/steps.vue';
-import elTab from './element/tab.vue';
-import elScrollBar from './element/scrollbar.vue';
+import elCheckBox from './element/basic/checkbox.vue';
+import elSwitch from './element/basic/switch.vue';
+import elNotify from './element/basic/notify.vue';
+import elPagination from './element/basic/pagination.vue';
+import elForm from './element/basic/form.vue';
+import elTree from './element/basic/tree.vue';
+import elSlider from './element/basic/slider.vue';
+import elMenu from './element/basic/menu.vue';
+import elInput from './element/basic/input.vue';
+import elUpload from './element/basic/upload.vue';
+import elSteps from './element/basic/steps.vue';
+import elTab from './element/basic/tab.vue';
+import elScrollBar from './element/basic/scrollbar.vue';
+import elCarousel from './element/basic/carousel.vue';
+
 import elDialog from './element/dialog/index.vue';
-import elCarousel from './element/carousel.vue';
 import composeInput from './element/compose-input/compose-input.vue';
 
 
@@ -99,8 +100,8 @@ class Helper {
         path: 'element',
         label: 'element',
         desc: '基于element-ui组件库的展示',
-        redirect: 'element/menu',
         component: element,
+        redirect: 'element/menu',
         children: [{
           path: 'input',
           label: 'input',
