@@ -25,10 +25,8 @@ const createLintingRule = () => ({
 
 // chunksAndTemplates is used to config bundle-js and html
 const chunksAndTemplates = (() => {
-  let vueBaseDir = utils.contextPath();
-
   let entries = {
-    'profile': path.resolve(vueBaseDir, `${config.VUE_PROJECT_NAME}/profile/entry.js`),
+    'profile': path.resolve(config.BASE_DIR, `${config.VUE_PROJECT_NAME}/profile/entry.js`),
   };
   let htmlConfigs = [
     {
@@ -56,7 +54,7 @@ const chunksAndTemplates = (() => {
 })();
 
 var baseConfig = {
-  context: utils.contextPath(),
+  context: config.BASE_DIR,
   entry: chunksAndTemplates.entries,
   output: {
     path: config.build.assetsRoot,
@@ -66,10 +64,10 @@ var baseConfig = {
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss', '.sass'],
     alias: {
-      '$assets': utils.contextPath() + '/assets',
-      '$components': utils.contextPath() + '/components',
-      'element-ui': utils.contextPath() + '/components/element-ui',
-      'assets': utils.contextPath() + `/${config.VUE_PROJECT_NAME}/assets`,
+      '$assets': config.BASE_DIR + '/assets',
+      '$components': config.BASE_DIR + '/components',
+      'element-ui': config.BASE_DIR + '/components/element-ui',
+      'assets': config.BASE_DIR + `/${config.VUE_PROJECT_NAME}/assets`,
     }
   },
   module: {
@@ -82,7 +80,7 @@ var baseConfig = {
       },
       {
         test: /\.js$/,
-        include: utils.contextPath(),
+        include: config.BASE_DIR,
         exclude: /node_modules|bower_components/,
         loaders: ['babel-loader']
       },
@@ -116,20 +114,20 @@ var baseConfig = {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
-        from: path.resolve(utils.contextPath(), 'assets/static'),
+        from: path.resolve(config.BASE_DIR, 'assets/static'),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
     ]),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(utils.contextPath(), `${config.VUE_PROJECT_NAME}/assets/static`),
+        from: path.resolve(config.BASE_DIR, `${config.VUE_PROJECT_NAME}/assets/static`),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
     ]),
     new webpack.ProvidePlugin({
-       'browserDebug': [path.resolve(utils.contextPath(), 'assets/libs/debug/browser.js')],
+       'browserDebug': [path.resolve(config.BASE_DIR, 'assets/libs/debug/browser.js')],
     }),
     new webpack.DefinePlugin({
       'BUILD_ENV': {

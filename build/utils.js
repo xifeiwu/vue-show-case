@@ -10,11 +10,6 @@ exports.assetsPath = function (_path) {
   return path.posix.join(assetsSubDirectory, _path)
 };
 
-exports.contextPath = function() {
-  // return path.resolve(__dirname, '../');
-  return config.curWorkDir;
-};
-
 exports.cssLoaders = function (options) {
   options = options || {}
 
@@ -50,7 +45,7 @@ exports.cssLoaders = function (options) {
     //     loader: 'sass-resources-loader',
     //     options: {
     //       resources: [
-    //         path.resolve(config.curWorkDir, 'app-galaxy/assets/css/tools/index.scss')
+    //         path.resolve(config.BASE_DIR, 'app-galaxy/assets/css/tools/index.scss')
     //       ]
     //     }
     //   })

@@ -3,12 +3,13 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path');
-const curWorkDir = process.cwd();
+const BASE_DIR = process.cwd();
 
 const VUE_PROJECT_NAME = 'show-case';
+const BASE_DIR = process.cwd();
 
 module.exports = {
-  curWorkDir: curWorkDir,
+  BASE_DIR,
   VUE_PROJECT_NAME,
   ASSETS_PREFIX: '/',
   dev: {
@@ -52,8 +53,8 @@ module.exports = {
     // index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    distDirectory: path.resolve(curWorkDir, `deploy/${VUE_PROJECT_NAME}`),
-    assetsRoot: path.resolve(curWorkDir, `deploy/${VUE_PROJECT_NAME}`),
+    distDirectory: path.resolve(BASE_DIR, `deploy/${VUE_PROJECT_NAME}`),
+    assetsRoot: path.resolve(BASE_DIR, `deploy/${VUE_PROJECT_NAME}`),
     assetsSubDirectory: 'assets',
     publicPath: '/',
 
