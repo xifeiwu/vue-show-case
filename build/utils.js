@@ -5,18 +5,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
 
 exports.assetsPath = function (_path) {
-  const assetsSubDirectory = process.env.NODE_ENV === 'production'
-    ? config.build.assetsSubDirectory
-    : config.dev.assetsSubDirectory
-
+  // NOTICE: can use different assetsSubDirectory depending on env
+  const assetsSubDirectory = config.build.assetsSubDirectory;
   return path.posix.join(assetsSubDirectory, _path)
-};
-
-exports.assetsPublicPath = function () {
-  const assetsPublicPath = process.env.NODE_ENV === 'production'
-    ? config.build.assetsPublicPath
-    : config.dev.assetsPublicPath
-  return assetsPublicPath;
 };
 
 exports.contextPath = function() {
@@ -53,6 +44,17 @@ exports.cssLoaders = function (options) {
         })
       })
     }
+    // NOTICE: inject global scss variable to project
+    // if (loader === 'sass') {
+    //   loaders.push({
+    //     loader: 'sass-resources-loader',
+    //     options: {
+    //       resources: [
+    //         path.resolve(config.curWorkDir, 'app-galaxy/assets/css/tools/index.scss')
+    //       ]
+    //     }
+    //   })
+    // }
 
     // Extract CSS when that option is specified
     // (which is the case during production build)

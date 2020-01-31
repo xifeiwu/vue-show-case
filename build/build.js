@@ -11,8 +11,9 @@ const webpack = require('webpack')
 const config = require('./config')
 const webpackConfig = require('./webpack.prod.conf')
 
-const spinner = ora(`building for ${process.env.NODE_ENV}...`)
-spinner.start()
+var NODE_ENV = process.env.NODE_ENV;
+const spinner = ora(`building for NODE_ENV: ${NODE_ENV}...`);
+spinner.start();
 
 rm(path.join(config.build.distDirectory, config.build.assetsSubDirectory), err => {
   if (err) throw err
@@ -38,4 +39,4 @@ rm(path.join(config.build.distDirectory, config.build.assetsSubDirectory), err =
       '  Opening index.html over file:// won\'t work.\n'
     ))
   })
-})
+});

@@ -5,34 +5,17 @@
 const path = require('path');
 const curWorkDir = process.cwd();
 
+const VUE_PROJECT_NAME = 'show-case';
+
 module.exports = {
   curWorkDir: curWorkDir,
+  VUE_PROJECT_NAME,
+  ASSETS_PREFIX: '/',
   dev: {
 
     // Paths
     assetsSubDirectory: 'assets',
-    assetsPublicPath: '/',
-    proxyTable: {
-      '/j-api/paas/': {
-        target: 'http://10.10.202.143:30334',
-        changeOrigin: true,
-        logLevel: 'debug',
-        pathRewrite: path => path.replace('\/j-api\/paas\/', '\/'),
-      },
-      '/n-api/assist': {
-        target: 'http://10.10.80.242:6002',
-        changeOrigin: true,
-        logLevel: 'debug',
-        pathRewrite: path => path.replace('\/n-api\/assist\/', ''),
-      },
-      '/n-api/': {
-        target: 'http://127.0.0.1:6003',
-        changeOrigin: true,
-        logLevel: 'debug',
-        pathRewrite: path => path.replace('\/n-api', ''),
-      },
-    },
-
+    publicPath: '/',
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 7001, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -69,10 +52,10 @@ module.exports = {
     // index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    distDirectory: path.resolve(curWorkDir, 'deploy/show-case/dist'),
-    assetsRoot: path.resolve(curWorkDir, 'deploy/show-case/dist'),
+    distDirectory: path.resolve(curWorkDir, `deploy/${VUE_PROJECT_NAME}`),
+    assetsRoot: path.resolve(curWorkDir, `deploy/${VUE_PROJECT_NAME}`),
     assetsSubDirectory: 'assets',
-    assetsPublicPath: '/',
+    publicPath: '/',
 
     /**
      * Source Maps

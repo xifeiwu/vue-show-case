@@ -28,18 +28,18 @@ const chunksAndTemplates = (() => {
   let vueBaseDir = utils.contextPath();
 
   let entries = {
-    'profile': path.resolve(vueBaseDir, 'show-case/profile/entry.js'),
+    'profile': path.resolve(vueBaseDir, `${config.VUE_PROJECT_NAME}/profile/entry.js`),
   };
   let htmlConfigs = [
     {
       "filename": "profile.html",
-      "title": "vue-components",
+      "title": "view vue components",
       "cdn": {
         "js": [],
-        // "css": ['/assets/components/ele/theme-chalk/index.css']
+        // "css": [`${config.ASSETS_PREFIX}assets/components/ele/theme-chalk/profile.css`]
       },
       "chunks": ["profile"],
-    }
+    },
   ];
 
   let templates = htmlConfigs.map(it => {
@@ -61,18 +61,15 @@ var baseConfig = {
   output: {
     path: config.build.assetsRoot,
     filename: "[name].[hash].js",
-    publicPath: process.env.NODE_ENV === 'production'
-      ? config.build.assetsPublicPath
-      : config.dev.assetsPublicPath
+    publicPath: config.ASSETS_PREFIX
   },
   resolve: {
     extensions: ['.js', '.vue', '.json', '.scss', '.sass'],
     alias: {
-      'element-ui': utils.contextPath() + '/components/element-ui',
-      '$components': utils.contextPath() + '/components',
       '$assets': utils.contextPath() + '/assets',
-      'assets': utils.contextPath() + '/show-case/assets',
-      'components': utils.contextPath() + '/show-case/components',
+      '$components': utils.contextPath() + '/components',
+      'element-ui': utils.contextPath() + '/components/element-ui',
+      'assets': utils.contextPath() + `/${config.VUE_PROJECT_NAME}/assets`,
     }
   },
   module: {
@@ -88,8 +85,6 @@ var baseConfig = {
         include: utils.contextPath(),
         exclude: /node_modules|bower_components/,
         loaders: ['babel-loader']
-        // include: [resolve('show-case'), resolve('app-text'), resolve("packages"), resolve('src'),
-        //   resolve('node_modules/webpack-dev-server/client')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -128,15 +123,20 @@ var baseConfig = {
     ]),
     new CopyWebpackPlugin([
       {
-        from: path.resolve(utils.contextPath(), 'show-case/assets/static'),
+        from: path.resolve(utils.contextPath(), `${config.VUE_PROJECT_NAME}/assets/static`),
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
     ]),
     new webpack.ProvidePlugin({
-      'window.browserDebug': [path.resolve(utils.contextPath(), 'assets/libs/debug/browser.js')],
-      'browserDebug': [path.resolve(utils.contextPath(), 'assets/libs/debug/browser.js')],
+       'browserDebug': [path.resolve(utils.contextPath(), 'assets/libs/debug/browser.js')],
     }),
+    new webpack.DefinePlugin({
+      'BUILD_ENV': {
+        PLATFORM: `'${process.env.PLATFORM}'`,
+        TIMESTAMP: Date.now()
+      }
+    })
   ]),
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue

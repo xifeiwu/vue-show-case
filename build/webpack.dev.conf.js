@@ -27,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
         { from: /^\/$/, to: '/profile.html' },
-        { from: /^\/profile/, to: '/profile.html' },
+        { from: /^\/profile(\/.*)*$/, to: '/profile.html' },
       ],
     },
     hot: true,
@@ -39,8 +39,17 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     overlay: config.dev.errorOverlay
       ? { warnings: false, errors: true }
       : false,
-    publicPath: config.dev.assetsPublicPath,
-    proxy: config.dev.proxyTable,
+    // publicPath: config.dev.publicPath,
+    publicPath: config.ASSETS_PREFIX,
+    proxy: {
+      '/n-api/assist': {
+        // target: 'http://10.10.201.137:6003',
+        target: 'http://127.0.0.1:6001',
+        changeOrigin: true,
+        logLevel: 'debug',
+        // pathRewrite: path => path.replace('\/n-api\/assist', ''),
+      }
+    },
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
       poll: config.dev.poll,
