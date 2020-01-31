@@ -27,6 +27,7 @@ import elTab from './element/tab.vue';
 import elScrollBar from './element/scrollbar.vue';
 import elDialog from './element/dialog/index.vue';
 import elCarousel from './element/carousel.vue';
+import composeInput from './element/compose-input/compose-input.vue';
 
 
 import custom from './custom';
@@ -51,164 +52,174 @@ class Helper {
   constructor() {
     this.richRouterConfig = [{
       path: '/profile',
-      name: 'profile',
       component: profile,
       redirect: '/profile/h5',
       children: [{
         path: 'h5',
-        name: 'h5',
+        label: 'h5',
         component: h5,
+        desc: 'h5原生功能展示',
         redirect: 'h5/svg',
         children: [{
           path: 'svg',
-          name: 'svg',
+          label: 'svg',
           component: h5Svg,
         }]
       }, {
         path: 'vue',
-        name: 'vue',
+        label: 'vue',
+        desc: 'vue相关功能展示',
         component: vueIndex,
         children: [{
           path: 'basic',
-          name: 'basic',
+          label: 'basic',
           component: vueBasic
         }, {
           path: 'transition',
-          name: 'transition',
+          label: 'transition',
           component: vueTransition
         }, {
           path: 'directive',
-          name: 'directive',
+          label: 'directive',
           component: vueDirective
         }, {
           path: 'event',
-          name: 'event',
+          label: 'event',
           component: vueEvent
         }, {
           path: 'slot',
-          name: 'slot',
+          label: 'slot',
           component: vueSlot
         }, {
           path: 'vnode',
-          name: 'vnode',
+          label: 'vnode',
           component: vueVNode
         }]
       }, {
         path: 'element',
-        name: 'element',
+        label: 'element',
+        desc: '基于element-ui组件库的展示',
         redirect: 'element/menu',
         component: element,
         children: [{
           path: 'input',
-          name: 'input',
+          label: 'input',
           component: elInput
         }, {
           path: 'upload',
-          name: 'upload',
+          label: 'upload',
           component: elUpload
         }, {
           path: 'checkbox',
-          name: 'checkbox',
+          label: 'checkbox',
           component: elCheckBox
         }, {
           path: 'switch',
-          name: 'switch',
+          label: 'switch',
           component: elSwitch
         }, {
           path: 'form',
-          name: 'form',
+          label: 'form',
           component: elForm
         }, {
           path: 'menu',
-          name: 'menu',
+          label: 'menu',
           component: elMenu
         }, {
           path: 'pagination',
-          name: 'pagination',
+          label: 'pagination',
           component: elPagination,
         }, {
           path: 'notify',
-          name: 'notify',
+          label: 'notify',
           component: elNotify
         }, {
           path: 'tree',
-          name: 'tree',
+          label: 'tree',
           component: elTree
         }, {
           path: 'slider',
-          name: 'slider',
+          label: 'slider',
           component: elSlider
         }, {
           path: 'steps',
-          name: 'steps',
+          label: 'steps',
           component: elSteps
         }, {
           path: 'tab',
-          name: 'tab',
+          label: 'tab',
           component: elTab
         }, {
           path: 'scrollbar',
-          name: 'scrollbar',
+          label: 'scrollbar',
           component: elScrollBar
         }, {
           path: 'dialog',
-          name: 'dialog',
+          label: 'dialog',
           component: elDialog
         }, {
           path: 'carousel',
-          name: 'carousel',
+          label: 'carousel',
           component: elCarousel
+        }, {
+          path: 'compose-input',
+          label: 'compose-input',
+          component: composeInput
         }]
       }, {
         path: 'custom',
-        name: 'custom',
+        label: 'custom',
+        desc: '基于自定义组件库的展示',
         component: custom,
         children: [{
           path: 'others',
-          name: 'others',
+          label: 'others',
           component: others
         }, {
           path: 'tree-navigation',
-          name: 'tree-navigation',
+          label: 'tree-navigation',
           component: CustomTreeNavigation
         }, {
           path: 'clipboard',
-          name: 'clipboard',
+          label: 'clipboard',
           component: ClipBoard
         }, {
           path: 'svg-icon',
-          name: 'svg-icon',
+          label: 'svg-icon',
           component: customSvgIcon
         }, {
           path: 'scroll-spy',
-          name: 'scroll-spy',
+          label: 'scroll-spy',
           component: customScrollSpy
         }, {
           path: 'simple-table',
-          name: 'simple-table',
+          label: 'simple-table',
           component: customSimpleTable
         }]
       }, {
         path: 'echarts',
-        name: 'echarts',
+        label: 'echarts',
+        desc: 'echarts接口展示',
         component: echarts
       }, {
         path: 'v-charts',
-        name: 'v-charts',
+        label: 'v-charts',
+        desc: 'v-charts接口展示',
         redirect: 'v-charts/line',
         component: vCharts,
         children: [{
           path: 'line',
-          name: 'line',
+          label: 'line',
           component: vChartsLine,
         }]
       }, {
         path: 'code-mirror',
-        name: 'code-mirror',
+        label: 'code-mirror',
+        desc: 'code-mirror模块展示',
         component: codeMirror,
         children: [{
           path: 'example',
-          name: 'example',
+          label: 'example',
           component: codeMirrorExample
         }]
       }]
@@ -270,7 +281,7 @@ class Helper {
     function updateItem(item) {
       let keysMap = {
         path: 'path',
-        name: 'name',
+        label: 'name',
         redirect: 'redirect',
         component: 'component',
         meta: 'meta',
@@ -351,7 +362,8 @@ class Helper {
     function updateItem(item) {
       let keysMap = {
         routePath: 'routePath',
-        name: 'name',
+        label: 'label',
+        desc: 'desc',
         icon: 'icon',
       };
       let result = {};
@@ -364,12 +376,13 @@ class Helper {
           }
         }
       }
+      return result;
       // filter config has not property 'name'
-      if (result.hasOwnProperty('name')) {
-        return result;
-      } else {
-        return null;
-      }
+      // if (result.hasOwnProperty('name')) {
+      //   return result;
+      // } else {
+      //   return null;
+      // }
     }
 
     function traverseComponent(component) {

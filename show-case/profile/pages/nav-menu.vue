@@ -17,29 +17,32 @@
       <div v-for="(menu, index) in menuList" :key="index">
         <el-submenu :index="menu.routePath" v-if="menu.children">
           <template slot="title">
-            <div class="icon-section">
-              <i v-if="menu.icon" :class="menu.icon"></i>
-              <span v-else class="abbr">{{menu.name[0].toUpperCase()}}</span>
+            <div v-popover-onmouseover="menu.desc">
+              <div class="icon-section" v-popover-onmouseover="menu.desc">
+                <i v-if="menu.icon" :class="menu.icon"></i>
+                <span v-else class="abbr">{{menu.label[0].toUpperCase()}}</span>
+              </div>
+              <span>{{menu.label}}</span>
             </div>
-            <span>{{menu.name}}</span>
           </template>
-          <el-menu-item v-for="subMenu in menu.children" :key="subMenu.name" :index="subMenu.routePath">
+          <el-menu-item v-for="subMenu in menu.children" :key="subMenu.label" :index="subMenu.routePath"
+           v-popover-onmouseover="subMenu.desc">
             <div class="icon-section">
               <i v-if="subMenu.icon" :class="subMenu.icon"></i>
-              <span v-else class="abbr">{{subMenu.name[0].toUpperCase()}}</span>
+              <span v-else class="abbr">{{subMenu.label[0].toUpperCase()}}</span>
             </div>
             <template slot="title">
-              <span>{{subMenu.name}}</span>
+              <span>{{subMenu.label}}</span>
             </template>
           </el-menu-item>
         </el-submenu>
-        <el-menu-item :index="menu.routePath" v-else>
+        <el-menu-item :index="menu.routePath" v-popover-onmouseover="menu.desc" v-else>
           <div class="icon-section">
             <i v-if="menu.icon" :class="menu.icon"></i>
-            <span v-else class="abbr">{{menu.name[0].toUpperCase()}}</span>
+            <span v-else class="abbr">{{menu.label[0].toUpperCase()}}</span>
           </div>
           <template slot="title">
-            <span>{{menu.name}}</span>
+            <span>{{menu.label}}</span>
           </template>
         </el-menu-item>
       </div>
@@ -154,10 +157,6 @@
     },
     data() {
       return {
-        navMenu: {
-          level2: [],
-          level1: []
-        }
       }
     },
     props: {
