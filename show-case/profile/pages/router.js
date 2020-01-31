@@ -21,6 +21,7 @@ import elTree from './element/tree.vue';
 import elSlider from './element/slider.vue';
 import elMenu from './element/menu.vue';
 import elInput from './element/input.vue';
+import elUpload from './element/upload.vue';
 import elSteps from './element/steps.vue';
 import elTab from './element/tab.vue';
 import elScrollBar from './element/scrollbar.vue';
@@ -104,6 +105,10 @@ class Helper {
           path: 'input',
           name: 'input',
           component: elInput
+        }, {
+          path: 'upload',
+          name: 'upload',
+          component: elUpload
         }, {
           path: 'checkbox',
           name: 'checkbox',
