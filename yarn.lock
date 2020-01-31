@@ -7769,6 +7769,11 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-class-component@^7.1.0:
+  version "7.2.2"
+  resolved "https://registry.npm.taobao.org/vue-class-component/download/vue-class-component-7.2.2.tgz#aecc6d28801f64c61eb04407cf3a5476da26b0c0"
+  integrity sha1-rsxtKIAfZMYesEQHzzpUdtomsMA=
+
 vue-codemirror@4.0.5:
   version "4.0.5"
   resolved "http://registry.npm.taobao.org/vue-codemirror/download/vue-codemirror-4.0.5.tgz#3a784d454fbfb17ce769b9fc90f10e9868687ecb"
@@ -7815,6 +7820,13 @@ vue-monaco-editor@^0.0.19:
   dependencies:
     lodash.debounce "^4.0.8"
     vue "^2.1.0"
+
+vue-property-decorator@^8.3.0:
+  version "8.3.0"
+  resolved "https://registry.npm.taobao.org/vue-property-decorator/download/vue-property-decorator-8.3.0.tgz?cache=0&sync_timestamp=1571289520041&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-property-decorator%2Fdownload%2Fvue-property-decorator-8.3.0.tgz#536f027dc7d626f37c8d85a2dc02f0a6cb979440"
+  integrity sha1-U28CfcfWJvN8jYWi3ALwpsuXlEA=
+  dependencies:
+    vue-class-component "^7.1.0"
 
 vue-router@^3.0.1:
   version "3.0.1"
