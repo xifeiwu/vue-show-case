@@ -17,7 +17,7 @@
     @keydown.up.prevent="onRightKeyDown"
   >
     <div class="custom-drag__button">
-      <span v-if="false">{{ status }}</span>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -85,15 +85,15 @@
 
   @include b(drag) {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     /*border: 1px solid gray;*/
     text-align: center;
     @include utils-vertical-center;
 
     @include e(button) {
-      width: 36px;
-      height: 36px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       /*user-select: none;*/
       border: solid 2px #409EFF;
