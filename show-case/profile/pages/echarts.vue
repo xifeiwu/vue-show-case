@@ -28,7 +28,7 @@
     },
     methods: {
       async startDraw() {
-        const loaded = await this.$net.lazyLoad('/assets/libs/echarts.simple.min.js');
+        const loaded = await this.$net.lazyLoad('/assets/libs/echarts/echarts.simple.min.js');
         const cpuMonitor = this.$el.querySelector('.cpu-monitor');
         var myChart = echarts.init(cpuMonitor);
 //        myChart.setOption(this.options1);
