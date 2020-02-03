@@ -9,7 +9,7 @@ const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
 const config = require('./config')
-const webpackConfig = require('./webpack.prod.conf')
+const webpackConfig = require('./webpack.build.conf')
 
 var NODE_ENV = process.env.NODE_ENV;
 const spinner = ora(`building for NODE_ENV: ${NODE_ENV}...`);

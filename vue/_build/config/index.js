@@ -48,12 +48,13 @@ module.exports = {
   },
 
   build: {
+    ASSETS_PREFIX: '/show-case/vue',
     // Template for index.html
     // index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    distDirectory: path.resolve(BASE_DIR, `_deploy/${VUE_PROJECT_NAME}`),
-    assetsRoot: path.resolve(BASE_DIR, `_deploy/${VUE_PROJECT_NAME}`),
+    distDirectory: path.resolve(BASE_DIR, `vue/_deploy`),
+    assetsRoot: path.resolve(BASE_DIR, `vue/_deploy`),
     assetsSubDirectory: 'assets',
     publicPath: '/',
 
