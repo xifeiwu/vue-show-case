@@ -363,9 +363,9 @@ class Helper {
     return result;
   }
 
-  getConfig4NavMenu() {
+  getMenuList() {
     // 截取部分属性，没有name属性会被过滤掉
-    function updateItem(item) {
+    const updateItem = (item) => {
       let keysMap = {
         routePath: 'routePath',
         label: 'label',
@@ -391,13 +391,13 @@ class Helper {
       // }
     }
 
-    function traverseComponent(component) {
+    const filter = it => it.hasOwnProperty('component');
+
+    const traverseComponent = (component) => {
       if (Array.isArray(component)) {
-        return component.map(traverseComponent.bind(this)).filter(it => {
-          return it;
-        });
+        return component.filter(filter).map(traverseComponent);
       } else if ('object' === typeof(component)) {
-        let config = updateItem.call(this, component);
+        const config = updateItem(component);
         if (config && component.hasOwnProperty('children')) {
           config['children'] = traverseComponent(component['children']);
         }

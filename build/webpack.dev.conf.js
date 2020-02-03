@@ -27,7 +27,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
         // { from: /^\/$/, to: '/profile.html' },
-        { from: /^\/show-case\/vue(\/.*)*$/, to: '/profile.html' },
+        { from: /^\/show-case\/vue(\/.*)*$/, to: '/index.html' },
       ],
     },
     hot: true,

@@ -26,17 +26,17 @@ const createLintingRule = () => ({
 // chunksAndTemplates is used to config bundle-js and html
 const chunksAndTemplates = (() => {
   let entries = {
-    'profile': path.resolve(config.BASE_DIR, `${config.VUE_PROJECT_NAME}/profile/entry.js`),
+    'index': path.resolve(config.BASE_DIR, `${config.VUE_PROJECT_NAME}/entry.js`),
   };
   let htmlConfigs = [
     {
-      "filename": "profile.html",
+      "filename": "index.html",
       "title": "view vue components",
       "cdn": {
         "js": [],
         // "css": [`${config.ASSETS_PREFIX}assets/components/ele/theme-chalk/profile.css`]
       },
-      "chunks": ["profile"],
+      "chunks": ["index"],
     },
   ];
 

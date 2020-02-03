@@ -142,6 +142,7 @@
 //    text-color="white"
 //    active-text-color="#409EFF"
     created() {
+      console.log(this.menuList);
     },
     mounted() {
 
@@ -151,7 +152,7 @@
         'collapseMenu': 'collapseMenu'
       }),
       menuList() {
-        const menuConfig = this.$router.helper.getConfig4NavMenu();
+        const menuConfig = this.$router.helper.getMenuList();
         return menuConfig;
       }
     },
