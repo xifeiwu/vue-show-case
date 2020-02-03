@@ -1,10 +1,10 @@
 <template>
   <div id="vue-transition">
     <div class="demo">
+      <vue-transition-cartoon></vue-transition-cartoon>
       <!--<vue-transition></vue-transition>-->
-      <!--<vue-transition-group></vue-transition-group>-->
       <vue-transition-effect></vue-transition-effect>
-      <!--<vue-transition-cartoon></vue-transition-cartoon>-->
+      <vue-transition-group></vue-transition-group>
     </div>
     <!--<div>transition</div>-->
     <!--<div id="animated-number-demo">-->
