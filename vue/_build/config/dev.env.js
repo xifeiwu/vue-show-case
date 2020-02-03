@@ -3,5 +3,6 @@ const merge = require('webpack-merge')
 const prodEnv = require('./production.env')
 
 module.exports = merge(prodEnv, {
-  NODE_ENV: '"dev"'
+  NODE_ENV: '"dev"',
+  ASSETS_PREFIX: '"/"',
 })
