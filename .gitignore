@@ -1,4 +1,5 @@
 node_modules
+*/assets/static/components/ele/theme-chalk/
 dist/
 .sass-cache
 .idea
