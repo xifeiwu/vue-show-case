@@ -12,6 +12,7 @@ module.exports = {
   VUE_PROJECT_NAME,
   ASSETS_PREFIX: '/',
   dev: {
+    ASSETS_PREFIX: '/',
 
     // Paths
     assetsSubDirectory: 'assets',
@@ -48,7 +49,7 @@ module.exports = {
   },
 
   build: {
-    ASSETS_PREFIX: '/show-case/vue',
+    ASSETS_PREFIX: '/show-case/vue/',
     // Template for index.html
     // index: path.resolve(__dirname, '../dist/index.html'),
 
