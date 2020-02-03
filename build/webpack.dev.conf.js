@@ -26,8 +26,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     historyApiFallback: {
       rewrites: [
         // { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-        { from: /^\/$/, to: '/profile.html' },
-        { from: /^\/profile(\/.*)*$/, to: '/profile.html' },
+        // { from: /^\/$/, to: '/profile.html' },
+        { from: /^\/show-case\/vue(\/.*)*$/, to: '/profile.html' },
       ],
     },
     hot: true,

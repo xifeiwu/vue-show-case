@@ -4,7 +4,7 @@
 
 const path = require('path');
 
-const VUE_PROJECT_NAME = 'show-case';
+const VUE_PROJECT_NAME = 'vue';
 const BASE_DIR = process.cwd();
 
 module.exports = {

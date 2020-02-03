@@ -54,9 +54,9 @@ import VueRouter from 'vue-router';
 class Helper {
   constructor() {
     this.richRouterConfig = [{
-      path: '/profile',
+      path: '/show-case/vue',
       component: profile,
-      redirect: '/profile/h5',
+      redirect: '/show-case/vue/h5',
       children: [{
         path: 'h5',
         label: 'h5',
