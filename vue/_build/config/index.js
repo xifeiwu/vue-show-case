@@ -52,8 +52,8 @@ module.exports = {
     // index: path.resolve(__dirname, '../dist/index.html'),
 
     // Paths
-    distDirectory: path.resolve(BASE_DIR, `deploy/${VUE_PROJECT_NAME}`),
-    assetsRoot: path.resolve(BASE_DIR, `deploy/${VUE_PROJECT_NAME}`),
+    distDirectory: path.resolve(BASE_DIR, `_deploy/${VUE_PROJECT_NAME}`),
+    assetsRoot: path.resolve(BASE_DIR, `_deploy/${VUE_PROJECT_NAME}`),
     assetsSubDirectory: 'assets',
     publicPath: '/',
 
