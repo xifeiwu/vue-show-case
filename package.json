@@ -4,11 +4,11 @@
   "author": "xifei.wu",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=dev-server webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "NODE_ENV=dev-server webpack-dev-server --inline --progress --config vue/_build/webpack.dev.conf.js",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit",
-    "build": "NODE_ENV=production node build/build.js",
-    "pre-build": "node build/element-ui.js"
+    "build": "NODE_ENV=production node vue/_build/build.js",
+    "pre-build": "node vue/_build/element-ui.js"
   },
   "dependencies": {
     "async-validator": "^1.8.1",
