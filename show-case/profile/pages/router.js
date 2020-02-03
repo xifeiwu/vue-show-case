@@ -12,6 +12,12 @@ import vueSlot from './vue/slot/index.vue';
 import vueVNode from './vue/vnode/index.vue';
 
 import element from './element';
+
+import elDialog from './element/dialog/index.vue';
+import composeInput from './element/compose-input/compose-input.vue';
+
+import elScrollBar from './element/basic/scrollbar.vue';
+import elCarousel from './element/basic/carousel.vue';
 import elCheckBox from './element/basic/checkbox.vue';
 import elSwitch from './element/basic/switch.vue';
 import elNotify from './element/basic/notify.vue';
@@ -24,11 +30,7 @@ import elInput from './element/basic/input.vue';
 import elUpload from './element/basic/upload.vue';
 import elSteps from './element/basic/steps.vue';
 import elTab from './element/basic/tab.vue';
-import elScrollBar from './element/basic/scrollbar.vue';
-import elCarousel from './element/basic/carousel.vue';
 
-import elDialog from './element/dialog/index.vue';
-import composeInput from './element/compose-input/compose-input.vue';
 
 
 import custom from './custom';
@@ -103,6 +105,22 @@ class Helper {
         component: element,
         redirect: 'element/menu',
         children: [{
+          path: 'dialog',
+          label: 'dialog',
+          component: elDialog
+        }, {
+          path: 'compose-input',
+          label: 'compose-input',
+          component: composeInput
+        }, {
+          path: 'carousel',
+          label: 'carousel',
+          component: elCarousel
+        }, {
+          path: 'scrollbar',
+          label: 'scrollbar',
+          component: elScrollBar
+        }, {
           path: 'input',
           label: 'input',
           component: elInput
@@ -150,22 +168,6 @@ class Helper {
           path: 'tab',
           label: 'tab',
           component: elTab
-        }, {
-          path: 'scrollbar',
-          label: 'scrollbar',
-          component: elScrollBar
-        }, {
-          path: 'dialog',
-          label: 'dialog',
-          component: elDialog
-        }, {
-          path: 'carousel',
-          label: 'carousel',
-          component: elCarousel
-        }, {
-          path: 'compose-input',
-          label: 'compose-input',
-          component: composeInput
         }]
       }, {
         path: 'custom',
