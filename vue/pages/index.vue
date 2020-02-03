@@ -27,8 +27,8 @@
   import navMenu from './nav-menu.vue';
   export default {
     components: {navMenu},
-    create() {
-
+    created() {
+      console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
     },
     mounted() {
       this.onRoute(this.$route);
